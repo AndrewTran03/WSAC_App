@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
 
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.wsac_app.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" />
+    <fragment
+        android:id="@+id/recipeFragment"
+        android:name="com.example.wsac_app.RecipeFragment"
+        android:label="fragment_recipe"
+        tools:layout="@layout/fragment_recipe" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.wsac_app.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.wsac_app.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/submissionsFragment"
+        android:name="com.example.wsac_app.SubmissionsFragment"
+        android:label="fragment_submissions"
+        tools:layout="@layout/fragment_submissions" />
+    <fragment
+        android:id="@+id/previewFragment"
+        android:name="com.example.wsac_app.PreviewFragment"
+        android:label="fragment_preview"
+        tools:layout="@layout/fragment_preview" />
+    <fragment
+        android:id="@+id/confirmationFragment"
+        android:name="com.example.wsac_app.ConfirmationFragment"
+        android:label="fragment_confirmation"
+        tools:layout="@layout/fragment_confirmation" />
 </navigation>
