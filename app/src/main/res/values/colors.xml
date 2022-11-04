@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="burnt_orange">#EEAB79</color>
+    <color name="chicago_maroon">#994C65</color>
+    <color name="cadet_blue">#173B5A</color>
+    <color name="burnt_orange_dark">#BE885F</color>
+    <color name="gray">#E0E6EC</color>
 </resources>
