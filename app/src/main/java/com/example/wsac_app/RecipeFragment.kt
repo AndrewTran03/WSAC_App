@@ -14,8 +14,9 @@ class RecipeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
-        var view: View = inflater.inflate(R.layout.fragment_recipe, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_recipe, container, false)
 
+        MainActivity.appendWorkRequestEvent("RECIPE FRAGMENT - FRAGMENT VIEW CREATED")
         return view
     }
 }

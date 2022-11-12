@@ -14,22 +14,17 @@ import android.widget.Toast
 import com.example.wsac_app.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
-    //Variables
+
+    //Class Variables
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-    private var password:String = ""
-
+    private var password: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -38,23 +33,26 @@ class LoginFragment : Fragment() {
         binding.passwordEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
+
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 password = s.toString()
             }
         })
+
         binding.loginButton.setOnClickListener {
                 if (password.equals("admin")) {
-                    val toast = Toast.makeText(activity?.applicationContext, "Welcome", Toast.LENGTH_SHORT)
+                    val toast: Toast = Toast.makeText(activity?.applicationContext, "Welcome", Toast.LENGTH_SHORT)
                     toast.show()
                 } else {
-                    val toast = Toast.makeText(activity?.applicationContext, "Please enter correct password", Toast.LENGTH_SHORT)
+                    val toast: Toast = Toast.makeText(activity?.applicationContext, "Please enter correct password", Toast.LENGTH_SHORT)
                     toast.show()
                 }
         }
 
-
+        MainActivity.appendWorkRequestEvent("LOGIN FRAGMENT - FRAGMENT VIEW CREATED")
         return view
     }
 }
