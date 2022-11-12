@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="start">
+    <item
+        android:id="@+id/nav_recipe_fragment"
+        android:title="Recipe List">
+    </item>
+    <item
+        android:id="@+id/nav_favorites_fragment"
+        android:title="Favorites">
+    </item>
+    <item
+        android:id="@+id/nav_submissions_fragment"
+        android:title="Submissions">
+    </item>
+</menu>

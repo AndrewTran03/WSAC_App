@@ -9,27 +9,59 @@
         android:id="@+id/listFragment"
         android:name="com.example.wsac_app.ListFragment"
         android:label="fragment_list"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_self"
+            app:destination="@id/listFragment" />
+    </fragment>
     <fragment
         android:id="@+id/recipeFragment"
         android:name="com.example.wsac_app.RecipeFragment"
         android:label="fragment_recipe"
-        tools:layout="@layout/fragment_recipe" />
+        tools:layout="@layout/fragment_recipe" >
+        <action
+            android:id="@+id/action_recipeFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_recipeFragment_self2"
+            app:destination="@id/recipeFragment" />
+        <action
+            android:id="@+id/action_recipeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_recipeFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.wsac_app.FavoritesFragment"
         android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_self"
+            app:destination="@id/favoritesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.wsac_app.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_submissionsFragment"
+            app:destination="@id/submissionsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/submissionsFragment"
         android:name="com.example.wsac_app.SubmissionsFragment"
         android:label="fragment_submissions"
-        tools:layout="@layout/fragment_submissions" />
+        tools:layout="@layout/fragment_submissions" >
+        <action
+            android:id="@+id/action_submissionsFragment_to_previewFragment"
+            app:destination="@id/previewFragment" />
+        <action
+            android:id="@+id/action_submissionsFragment_to_confirmationFragment"
+            app:destination="@id/confirmationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/previewFragment"
         android:name="com.example.wsac_app.PreviewFragment"
