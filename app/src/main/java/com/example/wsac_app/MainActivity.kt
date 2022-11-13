@@ -73,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         //setSupportActionBar(toolbar)
 
         //hamburger menu
+        //TODO: use menu icon to close drawer
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //find drawer view

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ConfirmationFragment"
-    android:background="@color/burnt_orange_dark">
+    android:background="@color/burnt_orange">
 
     <TextView
         android:id="@+id/confirmation_text"

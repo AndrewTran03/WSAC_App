@@ -56,17 +56,12 @@
         android:label="fragment_submissions"
         tools:layout="@layout/fragment_submissions" >
         <action
-            android:id="@+id/action_submissionsFragment_to_previewFragment"
-            app:destination="@id/previewFragment" />
-        <action
             android:id="@+id/action_submissionsFragment_to_confirmationFragment"
             app:destination="@id/confirmationFragment" />
+        <action
+            android:id="@+id/action_submissionsFragment_to_recipeFragment"
+            app:destination="@id/recipeFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/previewFragment"
-        android:name="com.example.wsac_app.PreviewFragment"
-        android:label="fragment_preview"
-        tools:layout="@layout/fragment_preview" />
     <fragment
         android:id="@+id/confirmationFragment"
         android:name="com.example.wsac_app.ConfirmationFragment"
