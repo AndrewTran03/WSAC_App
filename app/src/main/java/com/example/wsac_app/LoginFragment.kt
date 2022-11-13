@@ -11,6 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.wsac_app.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
@@ -28,7 +32,6 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val view = binding.root
-
         //Listeners
         binding.passwordEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -46,6 +49,7 @@ class LoginFragment : Fragment() {
                 if (password.equals("admin")) {
                     val toast: Toast = Toast.makeText(activity?.applicationContext, "Welcome", Toast.LENGTH_SHORT)
                     toast.show()
+                    view.findNavController()?.navigate(R.id.action_loginFragment_to_submissionsFragment)
                 } else {
                     val toast: Toast = Toast.makeText(activity?.applicationContext, "Please enter correct password", Toast.LENGTH_SHORT)
                     toast.show()

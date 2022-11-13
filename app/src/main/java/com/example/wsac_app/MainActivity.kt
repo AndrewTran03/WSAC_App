@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.work.Data
 import androidx.work.ExistingWorkPolicy
@@ -91,19 +92,33 @@ class MainActivity : AppCompatActivity() {
     fun selectDrawerItem(item: MenuItem) {
         try {
             //val navControl = Navigation.findNavController(this, R.id.fragment)
-            var fragment = when (item.itemId) {
+            /**
+            when (item.itemId) {
                 R.id.nav_recipe_fragment -> (RecipeFragment::class.java).newInstance()
                     //navControl.navigate(R.id.action_recipeFragment_to_favoritesFragment)
                 R.id.nav_favorites_fragment -> (FavoritesFragment::class.java).newInstance()
                     //navControl.navigate(R.id.action_recipeFragment_to_favoritesFragment)
-                R.id.nav_submissions_fragment -> (SubmissionsFragment::class.java).newInstance()
+                R.id.nav_submissions_fragment -> (LoginFragment::class.java).newInstance()
                 else -> (RecipeFragment::class.java).newInstance()
             }
-
+            */
             //replace current fragment with new
+            /**
             supportFragmentManager.commit {
                 replace(R.id.constraint_layout, fragment, "NEW FRAGMENT")
                 addToBackStack(null)
+            }
+            */
+
+            when(item.itemId) {
+                R.id.nav_recipe_fragment ->
+                    navigateWithClearStack(R.id.recipeFragment)
+                R.id.nav_favorites_fragment ->
+                    navigateWithClearStack(R.id.favoritesFragment)
+                //navControl.navigate(R.id.action_recipeFragment_to_favoritesFragment)
+                R.id.nav_submissions_fragment ->
+                    navigateWithClearStack(R.id.loginFragment)
+                else -> navigateWithClearStack(R.id.recipeFragment)
             }
 
             //highlight selected item in NavigationView
@@ -126,5 +141,16 @@ class MainActivity : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    //create a new nav graph to allow fragments to use the activity's nav controller
+    private fun navigateWithClearStack(destination: Int) {
+        val navController = findNavController(R.id.fragment)
+        val navHostFragment: NavHostFragment = supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
+        val inflater = navHostFragment.navController.navInflater
+        val graph = inflater.inflate(R.navigation.nav_graph)
+        graph.setStartDestination(destination)
+
+        navController.graph = graph
     }
 }
