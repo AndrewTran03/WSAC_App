@@ -1,22 +1,15 @@
 package com.example.wsac_app
 
 import android.annotation.SuppressLint
-import android.app.NotificationManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Gravity
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.commit
-import androidx.navigation.Navigation
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -35,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navView: NavigationView
     private lateinit var drawerToggle: ActionBarDrawerToggle
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var viewModel: WSACViewModel
 
     //Website I Used Here for PostHere.io: https://posthere.io/706a-4262-85b5
     companion object {
@@ -67,6 +61,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //ViewModel
+        viewModel = ViewModelProvider(this)[WSACViewModel::class.java]
 
         //replace ActionBar with ToolBar
         //toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -116,12 +113,18 @@ class MainActivity : AppCompatActivity() {
 
             when(item.itemId) {
                 R.id.nav_recipe_fragment ->
-                    navigateWithClearStack(R.id.recipeFragment)
+                    navigateWithClearStack(R.id.listFragment)
                 R.id.nav_favorites_fragment ->
                     navigateWithClearStack(R.id.favoritesFragment)
                 //navControl.navigate(R.id.action_recipeFragment_to_favoritesFragment)
                 R.id.nav_submissions_fragment ->
-                    navigateWithClearStack(R.id.loginFragment)
+                    if (viewModel.loggedIn) {
+                        val toast: Toast = Toast.makeText(applicationContext, "Welcome back, Admin", Toast.LENGTH_SHORT)
+                        toast.show()
+                        navigateWithClearStack(R.id.submissionsFragment)
+                    }
+                    else
+                        navigateWithClearStack(R.id.loginFragment)
                 else -> navigateWithClearStack(R.id.recipeFragment)
             }
 

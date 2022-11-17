@@ -2,11 +2,13 @@ package com.example.wsac_app
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 
 class WSACViewModel (application: Application): AndroidViewModel(application) {
-    private var loggedIn: Boolean
+    //List Fragment
+    //lateinit var allRecipes: LiveData<List<FoodItem>>
 
-    init {
-        loggedIn = false
-    }
+    //Login Fragment
+    var loggedIn: Boolean = false
+
 }

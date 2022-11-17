@@ -2,20 +2,14 @@ package com.example.wsac_app
 
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import com.example.wsac_app.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
@@ -35,24 +29,25 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        //Viewmodel
         viewModel = ViewModelProvider(requireActivity())[WSACViewModel::class.java]
 
         //Listeners
         binding.passwordEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
-
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 password = s.toString()
             }
         })
 
+        //Listeners
         binding.loginButton.setOnClickListener {
                 if (password.equals("admin")) {
-                    val toast: Toast = Toast.makeText(activity?.applicationContext, "Welcome", Toast.LENGTH_SHORT)
+                    val toast: Toast = Toast.makeText(activity?.applicationContext, "Welcome, Admin", Toast.LENGTH_SHORT)
+                    viewModel.loggedIn = true
                     toast.show()
                     view.findNavController()?.navigate(R.id.action_loginFragment_to_submissionsFragment)
                 } else {
