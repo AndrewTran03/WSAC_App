@@ -11,4 +11,8 @@ class WSACViewModel (application: Application): AndroidViewModel(application) {
     //Login Fragment
     var loggedIn: Boolean = false
 
+    //Recipe Fragment
+    var currentItem: FoodItem ?= FoodItem("test", 1, 1.99, 100,
+    arrayOf<String>(), arrayOf<String>(), 0, 0)
+
 }

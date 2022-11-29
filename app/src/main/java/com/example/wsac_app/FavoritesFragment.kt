@@ -46,8 +46,8 @@ class FavoritesFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         //Test add stuff to recyclerview
-        val testIngredients = arrayListOf<String>("apple","banana")
-        val testInstructions = arrayListOf<String>("cut apple","slice banana")
+        val testIngredients = arrayOf<String>("apple","banana")
+        val testInstructions = arrayOf<String>("cut apple","slice banana")
         val testFoodItems = arrayListOf<FoodItem>()
         testFoodItems.add(FoodItem("I LOVE Mac and Cheese",10,20.0,100,testIngredients,testInstructions,348534, 2 ))
         adapter.setRecipes(testFoodItems)

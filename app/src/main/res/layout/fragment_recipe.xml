@@ -169,7 +169,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/cost_image" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/time_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -179,26 +179,26 @@
                     app:layout_constraintTop_toBottomOf="@+id/recipe_title" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/cost_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     android:text="$2.50"
-                    app:layout_constraintBottom_toTopOf="@+id/textView5"
+                    app:layout_constraintBottom_toTopOf="@+id/cal_text"
                     app:layout_constraintStart_toEndOf="@+id/time_image"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                    app:layout_constraintTop_toBottomOf="@+id/time_text" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/cal_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="20dp"
                     android:text="400 cal"
                     app:layout_constraintStart_toEndOf="@+id/time_image"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                    app:layout_constraintTop_toBottomOf="@+id/cost_text" />
 
                 <ImageView
                     android:id="@+id/imageView"
