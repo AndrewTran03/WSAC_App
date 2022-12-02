@@ -65,5 +65,8 @@ class RecipeFragment : Fragment() {
             instructionListDisplay += instructionList[i] + "\n"
         }
         instructionsText?.text = instructionListDisplay
+
+        photoImage = view.findViewById(R.id.recipe_image)
+        photoImage?.setImageResource(viewModel.currentItem?.photoId!!)
     }
 }

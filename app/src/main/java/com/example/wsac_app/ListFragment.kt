@@ -104,7 +104,7 @@ class ListFragment : Fragment() {
         //TODO CHANGE IMAGE RESOURCE
         override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
             holder.view.findViewById<TextView>(R.id.name).text = recipes[position].name
-            holder.view.findViewById<ImageView>(R.id.image).setImageResource(R.drawable.mac)
+            holder.view.findViewById<ImageView>(R.id.image).setImageResource(recipes[position].photoId!!)
 
             holder.itemView.setOnClickListener() {
                 viewModel.currentItem = recipes[position]

@@ -2,6 +2,10 @@ package com.example.wsac_app
 
 import java.lang.NumberFormatException
 
+var photoMap = mapOf("mac" to R.drawable.macncheese,
+                    "burger" to R.drawable.burger,
+                    "spaghetti" to R.drawable.spaghetti,
+                    "taco" to R.drawable.taco)
 class Parser {
     fun getTitle(title: String): String {
         return title
@@ -47,7 +51,12 @@ class Parser {
     }
 
     //TODO: parse photo to map to photo id integer in a dictionary or hashmap (separate class)
-    fun getPhoto(photo: String?): Int {
-        return 0
+    fun getPhoto(keyword: String): Int {
+        for ((key, value) in photoMap) {
+            if(keyword.contains(key)) {
+                return value
+            }
+        }
+        return R.drawable.mac
     }
 }
