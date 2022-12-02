@@ -14,13 +14,14 @@ class WSACViewModel (application: Application): AndroidViewModel(application) {
     var loggedIn: Boolean = false
 
     //Recipe Fragment
-    var currentItem: FoodItem ?= FoodItem("test", 1, 1.99, 100,
+    var currentItem: FoodItem = FoodItem("test", 1, 1.99, 100,
     arrayOf<String>(), arrayOf<String>(), 0, 0)
-    var switch:Boolean = true
     fun addFoodItem() {
-        currentItem?.let { recipeList.add(it.copy()) }
+        //currentItem?.let { recipeList.add(it.copy()) }
+        recipeList.add(currentItem.copy())
         allRecipes.value = recipeList
     }
+    var switch:Boolean = true
     fun sortName() {
         if (switch) {
             recipeList.sortBy { it.name }

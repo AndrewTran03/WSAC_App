@@ -2,6 +2,7 @@ package com.example.wsac_app
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +22,6 @@ class RecipeFragment : Fragment() {
     private var ingredientsText: TextView ?= null
     private var instructionsText: TextView ?= null
     private var photoImage: ImageView?= null
-    private var parser = Parser()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +70,8 @@ class RecipeFragment : Fragment() {
         instructionsText?.text = instructionListDisplay
 
         photoImage = view.findViewById(R.id.recipe_image)
-        photoImage?.setImageResource(parser.getPhoto(viewModel.currentItem?.name!!))
+        photoImage?.setImageResource(viewModel.currentItem?.photoId!!)
+
+        Log.d("bugVIEW",viewModel.currentItem.toString())
     }
 }
