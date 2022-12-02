@@ -21,6 +21,7 @@ class RecipeFragment : Fragment() {
     private var ingredientsText: TextView ?= null
     private var instructionsText: TextView ?= null
     private var photoImage: ImageView?= null
+    private var parser = Parser()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +70,6 @@ class RecipeFragment : Fragment() {
         instructionsText?.text = instructionListDisplay
 
         photoImage = view.findViewById(R.id.recipe_image)
-        photoImage?.setImageResource(viewModel.currentItem?.photoId!!)
+        photoImage?.setImageResource(parser.getPhoto(viewModel.currentItem?.name!!))
     }
 }

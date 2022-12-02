@@ -21,6 +21,7 @@ class ListFragment : Fragment() {
     private lateinit var viewModel: WSACViewModel
     private lateinit var recyclerView: RecyclerView
 
+    private var parser = Parser()
     val adapter = RecipeListAdapter()
 
     //Viewbinding
@@ -103,7 +104,7 @@ class ListFragment : Fragment() {
 
         override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
             holder.view.findViewById<TextView>(R.id.name).text = recipes[position].name
-            holder.view.findViewById<ImageView>(R.id.image).setImageResource(recipes[position].photoId!!)
+            holder.view.findViewById<ImageView>(R.id.image).setImageResource(parser.getPhoto(recipes[position].name))
 
             holder.itemView.setOnClickListener() {
                 viewModel.currentItem = recipes[position]
