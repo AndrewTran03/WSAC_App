@@ -16,9 +16,22 @@ class WSACViewModel (application: Application): AndroidViewModel(application) {
     //Recipe Fragment
     var currentItem: FoodItem ?= FoodItem("test", 1, 1.99, 100,
     arrayOf<String>(), arrayOf<String>(), 0, 0)
+    var switch:Boolean = true
     fun addFoodItem() {
-        currentItem?.let { recipeList.add(it) }
+        currentItem?.let { recipeList.add(it.copy()) }
         allRecipes.value = recipeList
+    }
+    fun sortName() {
+        if (switch) {
+            recipeList.sortBy { it.name }
+            allRecipes.value = recipeList
+            switch = !switch
+        } else {
+            recipeList.sortByDescending { it.name }
+            allRecipes.value = recipeList
+            switch = !switch
+        }
+
     }
 
 }

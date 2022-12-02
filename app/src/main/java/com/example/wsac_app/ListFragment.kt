@@ -53,6 +53,10 @@ class ListFragment : Fragment() {
 //        testFoodItems.add(FoodItem("Mac and Cheese",10,20.0,100,testIngredients,testInstructions,348534, 2 ))
 //        adapter.setRecipes(testFoodItems)
 
+        binding.sortButton.setOnClickListener {
+            viewModel.sortName()
+        }
+
         viewModel.allRecipes.observe(
             viewLifecycleOwner,
             Observer<List<FoodItem>>{ recipes ->
