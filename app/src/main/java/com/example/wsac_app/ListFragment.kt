@@ -1,12 +1,14 @@
 package com.example.wsac_app
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,12 +47,20 @@ class ListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         //Test add stuff to recyclerview
-        val testIngredients = arrayOf<String>("apple","banana")
-        val testInstructions = arrayOf<String>("cut apple","slice banana")
-        val testFoodItems = arrayListOf<FoodItem>()
-        testFoodItems.add(FoodItem("Mac and Cheese",10,20.0,100,testIngredients,testInstructions,348534, 2 ))
-        adapter.setRecipes(testFoodItems)
+//        val testIngredients = arrayOf<String>("apple","banana")
+//        val testInstructions = arrayOf<String>("cut apple","slice banana")
+//        val testFoodItems = arrayListOf<FoodItem>()
+//        testFoodItems.add(FoodItem("Mac and Cheese",10,20.0,100,testIngredients,testInstructions,348534, 2 ))
+//        adapter.setRecipes(testFoodItems)
 
+        viewModel.allRecipes.observe(
+            viewLifecycleOwner,
+            Observer<List<FoodItem>>{ recipes ->
+                recipes?.let{
+                    adapter.setRecipes(it)
+                }
+            }
+        )
 
         MainActivity.appendWorkRequestEvent("LIST FRAGMENT - FRAGMENT VIEW CREATED")
         return view

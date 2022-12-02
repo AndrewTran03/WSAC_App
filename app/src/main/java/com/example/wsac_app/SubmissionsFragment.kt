@@ -113,9 +113,12 @@ class SubmissionsFragment : Fragment() {
         submitButton = view.findViewById(R.id.submit_button)
         submitButton?.setOnClickListener( object: View.OnClickListener {
             override fun onClick(v: View?) {
+                viewModel.addFoodItem()
                 view.findNavController()?.navigate(R.id.action_submissionsFragment_to_confirmationFragment)
             }
         })
+
+
 
         MainActivity.appendWorkRequestEvent("SUBMISSIONS FRAGMENT - FRAGMENT VIEW CREATED")
         return view
