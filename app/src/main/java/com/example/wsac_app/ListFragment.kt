@@ -107,6 +107,7 @@ class ListFragment : Fragment() {
             holder.view.findViewById<ImageView>(R.id.image).setImageResource(R.drawable.mac)
 
             holder.itemView.setOnClickListener() {
+                viewModel.currentItem = recipes[position]
                 view?.findNavController()?.navigate(R.id.action_listFragment_to_recipeFragment)
             }
         }
