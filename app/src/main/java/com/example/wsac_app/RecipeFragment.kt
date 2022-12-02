@@ -55,23 +55,21 @@ class RecipeFragment : Fragment() {
         costText?.text = "$${viewModel.currentItem?.cost}"
         calText?.text = "${viewModel.currentItem?.cal} cal"
 
-        var ingredientList: Array<String> = viewModel.currentItem?.ingredients!!
+        val ingredientList: Array<String> = viewModel.currentItem?.ingredients!!
         var ingredientListDisplay: String = ""
         for(element in ingredientList) {
             ingredientListDisplay += element + "\n"
         }
         ingredientsText?.text = ingredientListDisplay
 
-        var instructionList: Array<String> = viewModel.currentItem?.instructions!!
+        val instructionList: Array<String> = viewModel.currentItem?.instructions!!
         var instructionListDisplay: String = ""
-        for(i in (0..instructionList.size - 1)) {
-            instructionListDisplay += instructionList[i] + "\n"
+        for(element in instructionList) {
+            instructionListDisplay += element + "\n"
         }
         instructionsText?.text = instructionListDisplay
 
         photoImage = view.findViewById(R.id.recipe_image)
         photoImage?.setImageResource(viewModel.currentItem?.photoId!!)
-
-        Log.d("bugVIEW",viewModel.currentItem.toString())
     }
 }

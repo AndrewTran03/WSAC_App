@@ -16,7 +16,7 @@ class UploadWorker(appContext: Context, workerParams: WorkerParameters): Worker(
         json.put("userID", inputData.getString("userID"))
         json.put("event", inputData.getString("event"))
 
-        Log.d(MainActivity.TAG, "PARAMS: ${json.toString()}; URL: " + MainActivity.URL)
+        Log.d(MainActivity.TAG, " PARAMS: ${json.toString()}; URL: " + MainActivity.URL)
         return uploadLog(json, MainActivity.URL)
     }
 

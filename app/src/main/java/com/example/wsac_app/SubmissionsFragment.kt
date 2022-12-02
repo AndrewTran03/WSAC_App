@@ -46,7 +46,6 @@ class SubmissionsFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 viewModel.currentItem?.name = parser.getTitle(s.toString())
                 viewModel.currentItem?.photoId = parser.getPhoto(s.toString())
-                Log.d("bugVIEW",s.toString())
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
@@ -109,20 +108,19 @@ class SubmissionsFragment : Fragment() {
         previewButton = view.findViewById(R.id.preview_button)
         previewButton?.setOnClickListener( object: View.OnClickListener {
             override fun onClick(v: View?) {
+                MainActivity.appendWorkRequestEvent("SUBMISSIONS FRAGMENT - RECIPE ${viewModel.currentItem?.name} BEING PREVIEWED")
                 view.findNavController()?.navigate(R.id.action_submissionsFragment_to_recipeFragment)
             }
         })
 
-        Log.d("bugVIEW",viewModel.currentItem.toString())
         submitButton = view.findViewById(R.id.submit_button)
         submitButton?.setOnClickListener( object: View.OnClickListener {
             override fun onClick(v: View?) {
                 viewModel.addFoodItem()
+                MainActivity.appendWorkRequestEvent("SUBMISSIONS FRAGMENT - RECIPE ${viewModel.currentItem?.name} SUBMITTED TO LIST FRAGMENT")
                 view.findNavController()?.navigate(R.id.action_submissionsFragment_to_confirmationFragment)
             }
         })
-
-
 
         MainActivity.appendWorkRequestEvent("SUBMISSIONS FRAGMENT - FRAGMENT VIEW CREATED")
         return view
@@ -130,6 +128,5 @@ class SubmissionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
     }
 }

@@ -1,5 +1,6 @@
 package com.example.wsac_app
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -61,7 +62,7 @@ class ListFragment : Fragment() {
         viewModel.allRecipes.observe(
             viewLifecycleOwner,
             Observer<List<FoodItem>>{ recipes ->
-                recipes?.let{
+                recipes?.let {
                     adapter.setRecipes(it)
                 }
             }
@@ -75,6 +76,7 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     inner class RecipeListAdapter() :
         RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder>() {
         private var recipes = emptyList<FoodItem>()
@@ -108,6 +110,7 @@ class ListFragment : Fragment() {
 
             holder.itemView.setOnClickListener() {
                 viewModel.currentItem = recipes[position]
+                MainActivity.appendWorkRequestEvent("LIST FRAGMENT - RECIPE ${viewModel.currentItem.name} SELECTED AND BEING VIEWED")
                 view?.findNavController()?.navigate(R.id.action_listFragment_to_recipeFragment)
             }
         }

@@ -1,5 +1,6 @@
 package com.example.wsac_app
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ class FavoritesFragment : Fragment() {
     private lateinit var viewModel: WSACViewModel
     private lateinit var recyclerView: RecyclerView
 
+    private var parser = Parser()
     val adapter = RecipeListAdapter()
 
     //Viewbinding
@@ -60,6 +62,7 @@ class FavoritesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     inner class RecipeListAdapter() :
         RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder>() {
         private var recipes = emptyList<FoodItem>()
@@ -89,9 +92,11 @@ class FavoritesFragment : Fragment() {
 
         override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
             holder.view.findViewById<TextView>(R.id.name).text = recipes[position].name
-            holder.view.findViewById<ImageView>(R.id.image).setImageResource(R.drawable.mac)
+            holder.view.findViewById<ImageView>(R.id.image).setImageResource(parser.getPhoto(recipes[position].name))
 
             holder.itemView.setOnClickListener() {
+                viewModel.currentItem = recipes[position]
+                MainActivity.appendWorkRequestEvent("FAVORITES FRAGMENT - RECIPE ${viewModel.currentItem.name} SELECTED AND BEING VIEWED")
                 view?.findNavController()?.navigate(R.id.action_favoritesFragment_to_recipeFragment)
             }
         }
