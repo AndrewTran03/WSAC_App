@@ -1,6 +1,7 @@
 package com.example.wsac_app
 
 import java.lang.NumberFormatException
+import java.util.*
 
 var photoMap = mapOf("mac" to R.drawable.macncheese,
                     "burger" to R.drawable.burger,
@@ -51,7 +52,7 @@ class Parser {
 
     fun getPhoto(keyword: String): Int {
         for ((key, value) in photoMap) {
-            if(keyword.contains(key)) {
+            if (keyword.lowercase().contains(key)) {
                 return value
             }
         }

@@ -87,7 +87,6 @@ class FavoritesFragment : Fragment() {
             return RecipeViewHolder(v)
         }
 
-        //TODO change resource for image
         override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
             holder.view.findViewById<TextView>(R.id.name).text = recipes[position].name
             holder.view.findViewById<ImageView>(R.id.image).setImageResource(R.drawable.mac)

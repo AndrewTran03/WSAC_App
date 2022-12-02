@@ -1,5 +1,6 @@
 package com.example.wsac_app
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -35,6 +36,7 @@ class RecipeFragment : Fragment() {
         return view
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -54,8 +56,8 @@ class RecipeFragment : Fragment() {
 
         var ingredientList: Array<String> = viewModel.currentItem?.ingredients!!
         var ingredientListDisplay: String = ""
-        for(i in 0..(ingredientList.size - 1)) {
-            ingredientListDisplay += ingredientList[i] + "\n"
+        for(element in ingredientList) {
+            ingredientListDisplay += element + "\n"
         }
         ingredientsText?.text = ingredientListDisplay
 
