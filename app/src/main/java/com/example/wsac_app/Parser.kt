@@ -21,7 +21,6 @@ class Parser {
         return t
     }
 
-    //TODO: Handle Number format exceptions for any Doubles or Ints
     fun getCost(cost: String): Double {
         val c: Double
         c = try {
@@ -50,7 +49,6 @@ class Parser {
         return instructions.split("\n".toRegex()).toTypedArray()
     }
 
-    //TODO: parse photo to map to photo id integer in a dictionary or hashmap (separate class)
     fun getPhoto(keyword: String): Int {
         for ((key, value) in photoMap) {
             if(keyword.contains(key)) {
