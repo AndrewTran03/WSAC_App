@@ -2,14 +2,14 @@ package com.example.wsac_app
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
+import android.text.Html
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class RecipeFragment : Fragment() {
 
@@ -22,6 +22,7 @@ class RecipeFragment : Fragment() {
     private var ingredientsText: TextView ?= null
     private var instructionsText: TextView ?= null
     private var photoImage: ImageView?= null
+    private var likeButton: ToggleButton?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,5 +72,40 @@ class RecipeFragment : Fragment() {
 
         photoImage = view.findViewById(R.id.recipe_image)
         photoImage?.setImageResource(viewModel.currentItem?.photoId!!)
+
+        //code for Made Times buttons
+        view.findViewById<TextView>(R.id.made_text).text =
+            Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
+        view.findViewById<FloatingActionButton>(R.id.plus_button).setOnClickListener {
+            viewModel.currentItem.madeTimes++
+            view.findViewById<TextView>(R.id.made_text).text =
+                Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
+        }
+        view.findViewById<FloatingActionButton>(R.id.minus_button).setOnClickListener {
+            viewModel.currentItem.madeTimes--
+            view.findViewById<TextView>(R.id.made_text).text =
+                Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
+        }
+
+        //code for Liked ToggleButton
+        likeButton = view.findViewById<ToggleButton>(R.id.like_button)
+        likeButton?.text = "LIKE"
+        likeButton?.textOff = "LIKE"
+        likeButton?.textOn = "UNLIKE"
+        if(viewModel.inFavorites()) {
+            likeButton?.isChecked = true
+        }
+        else {
+            likeButton?.text = "LIKE"
+            likeButton?.isChecked = false
+        }
+        likeButton?.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked) {
+                viewModel.addToFavorites()
+            }
+            else {
+                viewModel.removeFromFavorites()
+            }
+        }
     }
 }

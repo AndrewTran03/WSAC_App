@@ -85,13 +85,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="8dp"
                     android:text="Ingredients:"
                     android:textColor="@color/black"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/made_text" />
+                    app:layout_constraintTop_toBottomOf="@+id/like_button" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/plus_button"
@@ -208,6 +208,19 @@
                     android:src="@drawable/macncheese"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/recipe_title" />
+
+                <ToggleButton
+                    android:id="@+id/like_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Like"
+                    android:backgroundTint="@color/chicago_maroon"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/made_text" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 

@@ -1,6 +1,7 @@
 package com.example.wsac_app
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -32,7 +33,19 @@ class WSACViewModel (application: Application): AndroidViewModel(application) {
             allRecipes.value = recipeList
             switch = !switch
         }
-
     }
 
+    //Favorites Fragment
+    var likedRecipeList = mutableListOf<FoodItem>()
+    fun addToFavorites() {
+        likedRecipeList.add(currentItem)
+        Log.d("recipe is in favorites:", inFavorites().toString())
+    }
+    fun removeFromFavorites() {
+        likedRecipeList.remove(currentItem)
+        Log.d("recipe is in favorites:", inFavorites().toString())
+    }
+    fun inFavorites(): Boolean {
+        return likedRecipeList.contains(currentItem)
+    }
 }

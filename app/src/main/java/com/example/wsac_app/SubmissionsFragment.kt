@@ -96,15 +96,6 @@ class SubmissionsFragment : Fragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
         })
 
-        //Photo listener
-        binding.photoEditText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                //viewModel.currentItem?.photoId = parser.getPhoto(s.toString())
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
-        })
-
         previewButton = view.findViewById(R.id.preview_button)
         previewButton?.setOnClickListener( object: View.OnClickListener {
             override fun onClick(v: View?) {
