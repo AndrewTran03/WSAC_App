@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,18 +42,34 @@ class FavoritesFragment : Fragment() {
         //Viewmodel
         viewModel = ViewModelProvider(requireActivity())[WSACViewModel::class.java]
 
-
         //RecyclerView
         recyclerView = binding.favoritesFragRecyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-        //Test add stuff to recyclerview
-        val testIngredients = arrayOf<String>("apple","banana")
-        val testInstructions = arrayOf<String>("cut apple","slice banana")
-        val testFoodItems = arrayListOf<FoodItem>()
-        testFoodItems.add(FoodItem("I LOVE Mac and Cheese",10,20.0,100,testIngredients,testInstructions,348534, 2 ))
-        adapter.setRecipes(testFoodItems)
+        //Sorting Functionality Event Listeners
+        binding.favoritesFragSortNameButton.setOnClickListener {
+            viewModel.sortNameFavList()
+        }
+
+        binding.favoritesFragSortCostButton.setOnClickListener {
+            viewModel.sortCostFavList()
+        }
+
+        binding.favoritesFragSortCaloriesButton.setOnClickListener {
+            viewModel.sortCaloriesFavList()
+        }
+
+        viewModel.currPreviewing = false
+
+        viewModel.likedRecipes.observe(
+            viewLifecycleOwner,
+            Observer<List<FoodItem>>{ recipes ->
+                recipes?.let {
+                    adapter.setRecipes(it)
+                }
+            }
+        )
 
         MainActivity.appendWorkRequestEvent("FAVORITES FRAGMENT - FRAGMENT VIEW CREATED")
         return view
@@ -67,7 +84,6 @@ class FavoritesFragment : Fragment() {
         RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder>() {
         private var recipes = emptyList<FoodItem>()
         private var recipesBackup = emptyList<FoodItem>()
-        var switch: Boolean = true
 
         internal fun setRecipes(recipes: List<FoodItem>) {
             recipesBackup = recipes

@@ -48,16 +48,20 @@ class ListFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-        //Test add stuff to recyclerview
-//        val testIngredients = arrayOf<String>("apple","banana")
-//        val testInstructions = arrayOf<String>("cut apple","slice banana")
-//        val testFoodItems = arrayListOf<FoodItem>()
-//        testFoodItems.add(FoodItem("Mac and Cheese",10,20.0,100,testIngredients,testInstructions,348534, 2 ))
-//        adapter.setRecipes(testFoodItems)
-
-        binding.sortButton.setOnClickListener {
-            viewModel.sortName()
+        //Sorting Functionality Event Listeners
+        binding.listFragSortNameButton.setOnClickListener {
+            viewModel.sortNameRegularList()
         }
+
+        binding.listFragSortCostButton.setOnClickListener {
+            viewModel.sortCostRegularList()
+        }
+
+        binding.listFragSortCaloriesButton.setOnClickListener {
+            viewModel.sortCaloriesRegularList()
+        }
+
+        viewModel.currPreviewing = false
 
         viewModel.allRecipes.observe(
             viewLifecycleOwner,
@@ -81,7 +85,6 @@ class ListFragment : Fragment() {
         RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder>() {
         private var recipes = emptyList<FoodItem>()
         private var recipesBackup = emptyList<FoodItem>()
-        var switch: Boolean = true
 
         internal fun setRecipes(recipes: List<FoodItem>) {
             recipesBackup = recipes

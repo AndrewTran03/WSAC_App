@@ -50,41 +50,83 @@ class RecipeFragment : Fragment() {
         ingredientsText = view.findViewById(R.id.ingredients_text)
         instructionsText = view.findViewById(R.id.instructions_text)
 
-        nameText?.text = viewModel.currentItem?.name
-        timeText?.text = "${viewModel.currentItem?.time} m"
-        //TODO: Get Doubles to display in price format (two digits after decimal)
-        costText?.text = "$${viewModel.currentItem?.cost}"
-        calText?.text = "${viewModel.currentItem?.cal} cal"
+        if(viewModel.currPreviewing) {
+            //TODO: Disable "Like" Button in Preview Mode
+            likeButton?.isEnabled = false
+            likeButton?.isClickable = false
+            println("CURRENTLY PREVIEWING...")
 
-        val ingredientList: Array<String> = viewModel.currentItem?.ingredients!!
-        var ingredientListDisplay: String = ""
-        for(element in ingredientList) {
-            ingredientListDisplay += element + "\n"
-        }
-        ingredientsText?.text = ingredientListDisplay
+            nameText?.text = viewModel.previewItem.name
+            timeText?.text = "${viewModel.previewItem.time} m"
+            costText?.text = "$${usingKotlinStringFormat(viewModel.previewItem.cost, 2)}"
+            calText?.text = "${viewModel.previewItem.cal} cal"
 
-        val instructionList: Array<String> = viewModel.currentItem?.instructions!!
-        var instructionListDisplay: String = ""
-        for(element in instructionList) {
-            instructionListDisplay += element + "\n"
-        }
-        instructionsText?.text = instructionListDisplay
+            val ingredientList: Array<String> = viewModel.previewItem.ingredients
+            var ingredientListDisplay: String = ""
+            for(element in ingredientList) {
+                ingredientListDisplay += element + "\n"
+            }
+            ingredientsText?.text = ingredientListDisplay
 
-        photoImage = view.findViewById(R.id.recipe_image)
-        photoImage?.setImageResource(viewModel.currentItem?.photoId!!)
+            val instructionList: Array<String> = viewModel.previewItem.instructions
+            var instructionListDisplay: String = ""
+            for(element in instructionList) {
+                instructionListDisplay += element + "\n"
+            }
+            instructionsText?.text = instructionListDisplay
 
-        //code for Made Times buttons
-        view.findViewById<TextView>(R.id.made_text).text =
-            Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
-        view.findViewById<FloatingActionButton>(R.id.plus_button).setOnClickListener {
-            viewModel.currentItem.madeTimes++
+            photoImage = view.findViewById(R.id.recipe_image)
+            photoImage?.setImageResource(viewModel.previewItem.photoId!!)
+
+            //code for Made Times buttons
+            view.findViewById<TextView>(R.id.made_text).text =
+                Html.fromHtml("Made: <b>${viewModel.previewItem.madeTimes}</b> times(s)")
+            view.findViewById<FloatingActionButton>(R.id.plus_button).setOnClickListener {
+                viewModel.previewItem.madeTimes++
+                view.findViewById<TextView>(R.id.made_text).text =
+                    Html.fromHtml("Made: <b>${viewModel.previewItem.madeTimes}</b> times(s)")
+            }
+            view.findViewById<FloatingActionButton>(R.id.minus_button).setOnClickListener {
+                viewModel.previewItem.madeTimes--
+                view.findViewById<TextView>(R.id.made_text).text =
+                    Html.fromHtml("Made: <b>${viewModel.previewItem.madeTimes}</b> times(s)")
+            }
+        } else {
+            nameText?.text = viewModel.currentItem.name
+            timeText?.text = "${viewModel.currentItem.time} m"
+            costText?.text = "$${usingKotlinStringFormat(viewModel.currentItem.cost, 2)}"
+            calText?.text = "${viewModel.currentItem.cal} cal"
+
+            val ingredientList: Array<String> = viewModel.currentItem.ingredients
+            var ingredientListDisplay: String = ""
+            for(element in ingredientList) {
+                ingredientListDisplay += element + "\n"
+            }
+            ingredientsText?.text = ingredientListDisplay
+
+            val instructionList: Array<String> = viewModel.currentItem.instructions
+            var instructionListDisplay: String = ""
+            for(element in instructionList) {
+                instructionListDisplay += element + "\n"
+            }
+            instructionsText?.text = instructionListDisplay
+
+            photoImage = view.findViewById(R.id.recipe_image)
+            photoImage?.setImageResource(viewModel.currentItem.photoId!!)
+
+            //code for Made Times buttons
             view.findViewById<TextView>(R.id.made_text).text =
                 Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
-        }
-        view.findViewById<FloatingActionButton>(R.id.minus_button).setOnClickListener {
-            viewModel.currentItem.madeTimes--
-            view.findViewById<TextView>(R.id.made_text).text =
-                Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
+            view.findViewById<FloatingActionButton>(R.id.plus_button).setOnClickListener {
+                viewModel.currentItem.madeTimes++
+                view.findViewById<TextView>(R.id.made_text).text =
+                    Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
+            }
+            view.findViewById<FloatingActionButton>(R.id.minus_button).setOnClickListener {
+                viewModel.currentItem.madeTimes--
+                view.findViewById<TextView>(R.id.made_text).text =
+                    Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
+            }
         }
 
         //code for Liked ToggleButton
@@ -107,5 +149,9 @@ class RecipeFragment : Fragment() {
                 viewModel.removeFromFavorites()
             }
         }
+    }
+
+    private fun usingKotlinStringFormat(input: Double, scale: Int): kotlin.String {
+        return "%.${scale}f".format(input)
     }
 }

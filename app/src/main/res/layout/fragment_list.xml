@@ -15,15 +15,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sort_button" />
+        app:layout_constraintTop_toBottomOf="@+id/list_frag_sort_name_button" />
 
     <Button
-        android:id="@+id/sort_button"
+        android:id="@+id/list_frag_sort_name_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sort By: Name"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Sort: Name"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/list_frag_sort_cost_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sort: Cost"
+        app:layout_constraintEnd_toStartOf="@id/list_frag_sort_calories_button"
+        app:layout_constraintStart_toEndOf="@id/list_frag_sort_name_button"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/list_frag_sort_calories_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sort: Cal."
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

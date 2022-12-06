@@ -17,9 +17,9 @@ import com.example.wsac_app.databinding.FragmentSubmissionsBinding
 
 class SubmissionsFragment : Fragment() {
 
+    //Class Variables
     private var previewButton: Button?= null
     private var submitButton: Button?= null
-
 
     private lateinit var viewModel: WSACViewModel
     private var _binding: FragmentSubmissionsBinding? = null
@@ -40,12 +40,11 @@ class SubmissionsFragment : Fragment() {
         //Viewmodel
         viewModel = ViewModelProvider(requireActivity())[WSACViewModel::class.java]
 
-
         //Title listener
         binding.titleEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                viewModel.currentItem?.name = parser.getTitle(s.toString())
-                viewModel.currentItem?.photoId = parser.getPhoto(s.toString())
+                viewModel.previewItem.name = parser.getTitle(s.toString())
+                viewModel.previewItem.photoId = parser.getPhoto(s.toString())
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
@@ -54,7 +53,7 @@ class SubmissionsFragment : Fragment() {
         //Time listener
         binding.timeEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                viewModel.currentItem?.time = parser.getTime(s.toString())
+                viewModel.previewItem.time = parser.getTime(s.toString())
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
@@ -63,7 +62,7 @@ class SubmissionsFragment : Fragment() {
         //Cost listener
         binding.costEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                viewModel.currentItem?.cost = parser.getCost(s.toString())
+                viewModel.previewItem.cost = parser.getCost(s.toString())
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
@@ -72,7 +71,7 @@ class SubmissionsFragment : Fragment() {
         //Cal listener
         binding.calsEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                viewModel.currentItem?.cal = parser.getCal(s.toString())
+                viewModel.previewItem.cal = parser.getCal(s.toString())
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
@@ -81,7 +80,7 @@ class SubmissionsFragment : Fragment() {
         //Ingredients listener
         binding.ingredientsEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                viewModel.currentItem?.ingredients = parser.getIngredients(s.toString())
+                viewModel.previewItem.ingredients = parser.getIngredients(s.toString())
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
@@ -90,7 +89,7 @@ class SubmissionsFragment : Fragment() {
         //Instructions listener
         binding.instructionsEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                viewModel.currentItem?.instructions = parser.getInstructions(s.toString())
+                viewModel.previewItem.instructions = parser.getInstructions(s.toString())
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
@@ -99,7 +98,9 @@ class SubmissionsFragment : Fragment() {
         previewButton = view.findViewById(R.id.preview_button)
         previewButton?.setOnClickListener( object: View.OnClickListener {
             override fun onClick(v: View?) {
-                MainActivity.appendWorkRequestEvent("SUBMISSIONS FRAGMENT - RECIPE ${viewModel.currentItem?.name} BEING PREVIEWED")
+                viewModel.currPreviewing = true
+                viewModel.setPreviewFoodItem(viewModel.previewItem.copy())
+                MainActivity.appendWorkRequestEvent("SUBMISSIONS FRAGMENT - RECIPE ${viewModel.currentItem.name} BEING PREVIEWED")
                 view.findNavController()?.navigate(R.id.action_submissionsFragment_to_recipeFragment)
             }
         })
@@ -107,8 +108,12 @@ class SubmissionsFragment : Fragment() {
         submitButton = view.findViewById(R.id.submit_button)
         submitButton?.setOnClickListener( object: View.OnClickListener {
             override fun onClick(v: View?) {
+                viewModel.currPreviewing = false
+                viewModel.currentItem = viewModel.previewItem.copy()
+                //Log.d("BEFORE SUBMIT", viewModel.recipeList.size.toString())
                 viewModel.addFoodItem()
-                MainActivity.appendWorkRequestEvent("SUBMISSIONS FRAGMENT - RECIPE ${viewModel.currentItem?.name} SUBMITTED TO LIST FRAGMENT")
+                //Log.d("AFTER SUBMIT", viewModel.recipeList.size.toString())
+                MainActivity.appendWorkRequestEvent("SUBMISSIONS FRAGMENT - RECIPE ${viewModel.currentItem.name} SUBMITTED TO LIST FRAGMENT")
                 view.findNavController()?.navigate(R.id.action_submissionsFragment_to_confirmationFragment)
             }
         })
