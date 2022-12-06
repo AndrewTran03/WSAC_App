@@ -25,6 +25,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name="com.example.wsac_app.WSACNotificationService"
+            android:label="WSAC-App Notification Service"/>
+        <receiver android:name="com.example.wsac_app.WSACBroadcastReceiver"/>
+
     </application>
 
 </manifest>

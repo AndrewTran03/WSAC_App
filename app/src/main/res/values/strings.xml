@@ -2,7 +2,7 @@
     <string name="app_name">WSAC_App</string>
     <string name="floating_button_description">Floating action button</string>
     <string-array name="sorts">
-        <item></item>
+        <item>Select Type of Sort</item>
         <item>Name (Ascending)</item>
         <item>Name (Descending)</item>
         <item>Time (Ascending)</item>

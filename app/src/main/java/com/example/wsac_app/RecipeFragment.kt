@@ -124,6 +124,8 @@ class RecipeFragment : Fragment() {
                     viewModel.currentItem.madeTimes--
                     view.findViewById<TextView>(R.id.made_text).text =
                         Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
+                } else {
+                    Toast.makeText(requireContext(), "Error! Please don't create a negative value for number of made times!", Toast.LENGTH_SHORT).show()
                 }
             }
         }

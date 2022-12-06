@@ -1,6 +1,9 @@
 package com.example.wsac_app
 
+import android.annotation.SuppressLint
+import android.content.*
 import android.os.Bundle
+import android.os.IBinder
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -10,14 +13,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.example.wsac_app.WSACNotificationService.Companion.COMPLETE_INTENT
 import com.example.wsac_app.databinding.FragmentLoginBinding
 import com.example.wsac_app.databinding.FragmentSubmissionsBinding
 
 class SubmissionsFragment : Fragment() {
 
     //Class Variables
+    companion object {
+        const val INITIALIZE_STATUS: String = "INITIALIZATION STATUS"
+    }
+
     private var previewButton: Button?= null
     private var submitButton: Button?= null
 
@@ -29,6 +38,7 @@ class SubmissionsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
