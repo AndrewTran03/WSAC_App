@@ -27,6 +27,8 @@ class RecipeFragment : Fragment() {
     private var instructionsText: TextView ?= null
     private var photoImage: ImageView?= null
     private var likeButton: ToggleButton?= null
+    private var plusButton: FloatingActionButton?= null
+    private var minusButton: FloatingActionButton?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,15 +115,17 @@ class RecipeFragment : Fragment() {
             photoImage = view.findViewById(R.id.recipe_image)
             photoImage?.setImageResource(viewModel.currentItem.photoId!!)
 
+            plusButton = view.findViewById<FloatingActionButton>(R.id.plus_button)
+            minusButton = view.findViewById<FloatingActionButton>(R.id.minus_button)
             //code for Made Times buttons
             view.findViewById<TextView>(R.id.made_text).text =
                 Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
-            view.findViewById<FloatingActionButton>(R.id.plus_button).setOnClickListener {
+            plusButton?.setOnClickListener {
                 viewModel.currentItem.madeTimes++
                 view.findViewById<TextView>(R.id.made_text).text =
                     Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
             }
-            view.findViewById<FloatingActionButton>(R.id.minus_button).setOnClickListener {
+            minusButton?.setOnClickListener {
                 if(viewModel.currentItem.madeTimes > 0) {
                     viewModel.currentItem.madeTimes--
                     view.findViewById<TextView>(R.id.made_text).text =
@@ -141,10 +145,18 @@ class RecipeFragment : Fragment() {
             likeButton?.setTextColor(ContextCompat.getColor(requireContext(), R.color.chicago_maroon_dark))
             likeButton?.isEnabled = false
             likeButton?.isClickable = false
+            plusButton?.isEnabled = false
+            plusButton?.isClickable = false
+            minusButton?.isEnabled = false
+            minusButton?.isClickable = false
         }
         else {
             likeButton?.isEnabled = true
             likeButton?.isClickable = true
+            plusButton?.isEnabled = true
+            plusButton?.isClickable = true
+            minusButton?.isEnabled = true
+            minusButton?.isClickable = true
             if (viewModel.inFavorites(viewModel.currentItem)) {
                 likeButton?.isChecked = true
             } else {
