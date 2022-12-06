@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Ingredients:"
+                    android:text="@string/ingredients_caption"
                     android:textColor="@color/black"
                     android:textSize="24sp"
                     android:textStyle="bold"
@@ -129,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
-                    android:text="Cooking Instructions:"
+                    android:text="@string/instructions_caption"
                     android:textColor="@color/black"
                     android:textSize="24sp"
                     android:textStyle="bold"
@@ -216,6 +216,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/made_text" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.core.widget.NestedScrollView>
 
     </androidx.cardview.widget.CardView>

@@ -6,6 +6,8 @@
     <string name="unlike_caption">UNLIKE</string>
     <string name="made_times_placeholder">Made: 0 time(s)</string>
     <string name="floating_button_description">Floating action button</string>
+    <string name="ingredients_caption">Ingredients:</string>
+    <string name="instructions_caption">Cooking Instructions:</string>
 
     <!-- Login Fragment -->
     <string name="welcome">Welcome, Admin</string>

@@ -1,6 +1,7 @@
 package com.example.wsac_app
 
 import android.app.*
+import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
@@ -32,7 +33,7 @@ class WSACNotificationService: Service() {
         this.createNotificationChannel()
 
         val pendingIntent: PendingIntent = Intent(this, SubmissionsFragment::class.java).let {
-            notificationIntent -> PendingIntent.getActivity(this,0,notificationIntent,0)
+            notificationIntent -> PendingIntent.getActivity(this,0,notificationIntent,FLAG_IMMUTABLE)
         }
 
         val notification: Notification = Notification.Builder(this, CHANNEL_ID).
