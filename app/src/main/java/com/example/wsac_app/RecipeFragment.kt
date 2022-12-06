@@ -120,9 +120,11 @@ class RecipeFragment : Fragment() {
                     Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
             }
             view.findViewById<FloatingActionButton>(R.id.minus_button).setOnClickListener {
-                viewModel.currentItem.madeTimes--
-                view.findViewById<TextView>(R.id.made_text).text =
-                    Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
+                if(viewModel.currentItem.madeTimes > 0) {
+                    viewModel.currentItem.madeTimes--
+                    view.findViewById<TextView>(R.id.made_text).text =
+                        Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
+                }
             }
         }
 
