@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">WSAC_App</string>
     <string name="floating_button_description">Floating action button</string>
+    <string-array name="sorts">
+        <item></item>
+        <item>Name (Ascending)</item>
+        <item>Name (Descending)</item>
+        <item>Time (Ascending)</item>
+        <item>Time (Descending)</item>
+        <item>Cost (Ascending)</item>
+        <item>Cost (Descending)</item>
+        <item>Cals (Ascending)</item>
+        <item>Cals (Descending)</item>
+    </string-array>
 </resources>

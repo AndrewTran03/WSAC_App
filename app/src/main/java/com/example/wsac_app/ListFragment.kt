@@ -6,8 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -48,18 +47,55 @@ class ListFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-        //Sorting Functionality Event Listeners
-        binding.listFragSortNameButton.setOnClickListener {
-            viewModel.sortNameRegularList()
+        // gets the sorting options from an array in strings.xml for dropdown
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.sorts,
+            android.R.layout.simple_spinner_item).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            binding.sortDropdown?.adapter = adapter
         }
 
-        binding.listFragSortCostButton.setOnClickListener {
-            viewModel.sortCostRegularList()
-        }
+        //set spinner's event listener
+        binding.sortDropdown?.setOnItemSelectedListener(object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+                // detect item selected
+                if(parent.getItemAtPosition(pos).toString() == "Name (Ascending)") {
+                    viewModel.sortNameRegularList(true)
+                }
+                else if(parent.getItemAtPosition(pos).toString() == "Name (Descending)") {
+                    viewModel.sortNameRegularList(false)
+                }
+                else if(parent.getItemAtPosition(pos).toString() == "Time (Ascending)") {
+                    viewModel.sortTimeRegularList(true)
+                }
+                else if(parent.getItemAtPosition(pos).toString() == "Time (Descending)") {
+                    viewModel.sortTimeRegularList(false)
+                }
+                else if(parent.getItemAtPosition(pos).toString() == "Cost (Ascending)") {
+                    viewModel.sortCostRegularList(true)
+                }
+                else if(parent.getItemAtPosition(pos).toString() == "Cost (Descending)") {
+                    viewModel.sortCostRegularList(false)
+                }
+                else if(parent.getItemAtPosition(pos).toString() == "Cals (Ascending)") {
+                    viewModel.sortCaloriesRegularList(true)
+                }
+                else if(parent.getItemAtPosition(pos).toString() == "Cals (Descending)") {
+                    viewModel.sortCaloriesRegularList(false)
+                }
+                else {
+                    //do nothing
+                }
+            }
 
-        binding.listFragSortCaloriesButton.setOnClickListener {
-            viewModel.sortCaloriesRegularList()
-        }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // when selection is empty
+            }
+        })
 
         viewModel.currPreviewing = false
 
@@ -110,6 +146,11 @@ class ListFragment : Fragment() {
         override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
             holder.view.findViewById<TextView>(R.id.name).text = recipes[position].name
             holder.view.findViewById<ImageView>(R.id.image).setImageResource(parser.getPhoto(recipes[position].name))
+            //if the recipe is in favorites
+            if(!viewModel.inFavorites(recipes[position])) {
+                holder.view.findViewById<ImageView>(R.id.liked_padding).visibility = View.INVISIBLE
+                holder.view.findViewById<ImageView>(R.id.heart_icon).visibility = View.INVISIBLE
+            }
 
             holder.itemView.setOnClickListener() {
                 viewModel.currentItem = recipes[position]

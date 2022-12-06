@@ -23,40 +23,40 @@ class WSACViewModel (application: Application): AndroidViewModel(application) {
         recipeList.add(currentItem.copy())
         allRecipes.value = recipeList
     }
-    private var sortAlphaRegList: Boolean = true
-    fun sortNameRegularList() {
+    fun sortNameRegularList(sortAlphaRegList: Boolean) {
         if (sortAlphaRegList) {
             recipeList.sortBy { it.name }
             allRecipes.value = recipeList
-            sortAlphaRegList = !sortAlphaRegList
         } else {
             recipeList.sortByDescending { it.name }
             allRecipes.value = recipeList
-            sortAlphaRegList = !sortAlphaRegList
         }
     }
-    private var sortAscendCostRegList: Boolean = true
-    fun sortCostRegularList() {
+    fun sortTimeRegularList(sortAscendTimeRegList: Boolean) {
+        if (sortAscendTimeRegList) {
+            recipeList.sortBy { it.time }
+            allRecipes.value = recipeList
+        } else {
+            recipeList.sortByDescending { it.time }
+            allRecipes.value = recipeList
+        }
+    }
+    fun sortCostRegularList(sortAscendCostRegList: Boolean) {
         if (sortAscendCostRegList) {
             recipeList.sortBy { it.cost }
             allRecipes.value = recipeList
-            sortAscendCostRegList = !sortAscendCostRegList
         } else {
             recipeList.sortByDescending { it.cost }
             allRecipes.value = recipeList
-            sortAscendCostRegList = !sortAscendCostRegList
         }
     }
-    private var sortAscendCalsRegList: Boolean = true
-    fun sortCaloriesRegularList() {
+    fun sortCaloriesRegularList(sortAscendCalsRegList: Boolean) {
         if (sortAscendCalsRegList) {
             recipeList.sortBy { it.cal }
             allRecipes.value = recipeList
-            sortAscendCalsRegList = !sortAscendCalsRegList
         } else {
             recipeList.sortByDescending { it.cal }
             allRecipes.value = recipeList
-            sortAscendCalsRegList = !sortAscendCalsRegList
         }
     }
 
@@ -65,51 +65,53 @@ class WSACViewModel (application: Application): AndroidViewModel(application) {
     var likedRecipeList = mutableListOf<FoodItem>()
     fun addToFavorites() {
         likedRecipeList.add(currentItem)
-        Log.d("recipe is in favorites:", inFavorites().toString())
+        Log.d("recipe is in favorites:", inFavorites(currentItem).toString())
         likedRecipes.value = likedRecipeList
     }
     fun removeFromFavorites() {
         likedRecipeList.remove(currentItem)
-        Log.d("recipe is in favorites:", inFavorites().toString())
+        Log.d("recipe is in favorites:", inFavorites(currentItem).toString())
         likedRecipes.value = likedRecipeList
     }
-    fun inFavorites(): Boolean {
-        return likedRecipeList.contains(currentItem)
+    fun inFavorites(item: FoodItem): Boolean {
+        return likedRecipeList.contains(item)
     }
-    private var sortAlphaFavList: Boolean = true
-    fun sortNameFavList() {
+    fun sortNameFavList(sortAlphaFavList: Boolean) {
         if (sortAlphaFavList) {
             likedRecipeList.sortBy { it.name }
             likedRecipes.value = likedRecipeList
-            sortAlphaFavList = !sortAlphaFavList
         } else {
             likedRecipeList.sortByDescending { it.name }
             likedRecipes.value = likedRecipeList
-            sortAlphaFavList = !sortAlphaFavList
+        }
+    }
+    fun sortTimeFavList(sortAscendTimeFavList: Boolean) {
+        if (sortAscendTimeFavList) {
+            likedRecipeList.sortBy { it.time }
+            likedRecipes.value = likedRecipeList
+        } else {
+            likedRecipeList.sortByDescending { it.time }
+            likedRecipes.value = likedRecipeList
         }
     }
     private var sortAscendCostFavList: Boolean = true
-    fun sortCostFavList() {
-        if (sortAscendCostRegList) {
+    fun sortCostFavList(sortAscendCostFavList: Boolean) {
+        if (sortAscendCostFavList) {
             likedRecipeList.sortBy { it.cost }
             likedRecipes.value = likedRecipeList
-            sortAscendCostFavList = !sortAscendCostFavList
         } else {
             likedRecipeList.sortByDescending { it.cost }
             likedRecipes.value = likedRecipeList
-            sortAscendCostFavList = !sortAscendCostFavList
         }
     }
     private var sortAscendCalsFavList: Boolean = true
-    fun sortCaloriesFavList() {
+    fun sortCaloriesFavList(sortAscendCalsFavList: Boolean) {
         if (sortAscendCalsFavList) {
             likedRecipeList.sortBy { it.cal }
             likedRecipes.value = likedRecipeList
-            sortAscendCalsFavList = !sortAscendCalsFavList
         } else {
             likedRecipeList.sortByDescending { it.cal }
             likedRecipes.value = likedRecipeList
-            sortAscendCalsFavList = !sortAscendCalsFavList
         }
     }
 

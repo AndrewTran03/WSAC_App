@@ -1,12 +1,16 @@
 package com.example.wsac_app
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -47,18 +51,56 @@ class FavoritesFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-        //Sorting Functionality Event Listeners
-        binding.favoritesFragSortNameButton.setOnClickListener {
-            viewModel.sortNameFavList()
+
+        // gets the sorting options from an array in strings.xml for dropdown
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.sorts,
+            android.R.layout.simple_spinner_item).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            binding.sortFavoritesDropdown?.adapter = adapter
         }
 
-        binding.favoritesFragSortCostButton.setOnClickListener {
-            viewModel.sortCostFavList()
-        }
+        //set spinner's event listener
+        binding.sortFavoritesDropdown?.setOnItemSelectedListener(object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+                // detect item selected
+                if(parent.getItemAtPosition(pos).toString() == "Name (Ascending)") {
+                    viewModel.sortNameFavList(true)
+                }
+                else if(parent.getItemAtPosition(pos).toString() == "Name (Descending)") {
+                    viewModel.sortNameFavList(false)
+                }
+                else if(parent.getItemAtPosition(pos).toString() == "Time (Ascending)") {
+                    viewModel.sortTimeFavList(true)
+                }
+                else if(parent.getItemAtPosition(pos).toString() == "Time (Descending)") {
+                    viewModel.sortTimeFavList(false)
+                }
+                else if(parent.getItemAtPosition(pos).toString() == "Cost (Ascending)") {
+                    viewModel.sortCostFavList(true)
+                }
+                else if(parent.getItemAtPosition(pos).toString() == "Cost (Descending)") {
+                    viewModel.sortCostFavList(false)
+                }
+                else if(parent.getItemAtPosition(pos).toString() == "Cals (Ascending)") {
+                    viewModel.sortCaloriesFavList(true)
+                }
+                else if(parent.getItemAtPosition(pos).toString() == "Cals (Descending)") {
+                    viewModel.sortCaloriesFavList(false)
+                }
+                else {
+                    //do nothing
+                }
+            }
 
-        binding.favoritesFragSortCaloriesButton.setOnClickListener {
-            viewModel.sortCaloriesFavList()
-        }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // when selection is empty
+            }
+        })
 
         viewModel.currPreviewing = false
 
@@ -108,6 +150,8 @@ class FavoritesFragment : Fragment() {
 
         override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
             holder.view.findViewById<TextView>(R.id.name).text = recipes[position].name
+            holder.view.findViewById<TextView>(R.id.name).setTextColor(Color.parseColor("#FFFFFF"))
+            holder.view.findViewById<CardView>(R.id.list_card)?.setCardBackgroundColor(Color.parseColor("#173B5A"))
             holder.view.findViewById<ImageView>(R.id.image).setImageResource(parser.getPhoto(recipes[position].name))
 
             holder.itemView.setOnClickListener() {

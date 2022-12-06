@@ -1,6 +1,7 @@
 package com.example.wsac_app
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast

@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
@@ -52,8 +53,8 @@
             android:id="@+id/heart_icon"
             android:layout_width="16dp"
             android:layout_height="16dp"
-            android:layout_marginStart="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/liked_padding"
+            app:layout_constraintEnd_toEndOf="@+id/liked_padding"
             app:layout_constraintStart_toStartOf="@+id/liked_padding"
             app:layout_constraintTop_toTopOf="@+id/liked_padding"
             app:srcCompat="@drawable/ic_heart" />

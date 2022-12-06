@@ -1,6 +1,7 @@
 package com.example.wsac_app
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Html
 import androidx.fragment.app.Fragment
@@ -51,11 +52,6 @@ class RecipeFragment : Fragment() {
         instructionsText = view.findViewById(R.id.instructions_text)
 
         if(viewModel.currPreviewing) {
-            //TODO: Disable "Like" Button in Preview Mode
-            likeButton?.isEnabled = false
-            likeButton?.isClickable = false
-            println("CURRENTLY PREVIEWING...")
-
             nameText?.text = viewModel.previewItem.name
             timeText?.text = "${viewModel.previewItem.time} m"
             costText?.text = "$${usingKotlinStringFormat(viewModel.previewItem.cost, 2)}"
@@ -134,19 +130,26 @@ class RecipeFragment : Fragment() {
         likeButton?.text = "LIKE"
         likeButton?.textOff = "LIKE"
         likeButton?.textOn = "UNLIKE"
-        if(viewModel.inFavorites()) {
-            likeButton?.isChecked = true
+        if(viewModel.currPreviewing) {
+            likeButton?.setTextColor(Color.parseColor("#753740"))
+            likeButton?.isEnabled = false
+            likeButton?.isClickable = false
         }
         else {
-            likeButton?.text = "LIKE"
-            likeButton?.isChecked = false
-        }
-        likeButton?.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked) {
-                viewModel.addToFavorites()
+            likeButton?.isEnabled = true
+            likeButton?.isClickable = true
+            if (viewModel.inFavorites(viewModel.currentItem)) {
+                likeButton?.isChecked = true
+            } else {
+                likeButton?.text = "LIKE"
+                likeButton?.isChecked = false
             }
-            else {
-                viewModel.removeFromFavorites()
+            likeButton?.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    viewModel.addToFavorites()
+                } else {
+                    viewModel.removeFromFavorites()
+                }
             }
         }
     }
