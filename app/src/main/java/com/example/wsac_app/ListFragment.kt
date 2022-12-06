@@ -99,35 +99,45 @@ class ListFragment : Fragment() {
                 // detect item selected
                 if(parent.getItemAtPosition(pos).toString() == "Name (Ascending)") {
                     viewModel.sortNameRegularList(true)
+                    MainActivity.appendWorkRequestEvent("LIST FRAGMENT - SORT RECIPES BY NAME SELECTED - ASCENDING ORDER")
                 }
                 else if(parent.getItemAtPosition(pos).toString() == "Name (Descending)") {
                     viewModel.sortNameRegularList(false)
+                    MainActivity.appendWorkRequestEvent("LIST FRAGMENT - SORT RECIPES BY NAME SELECTED - DESCENDING ORDER")
                 }
                 else if(parent.getItemAtPosition(pos).toString() == "Time (Ascending)") {
                     viewModel.sortTimeRegularList(true)
+                    MainActivity.appendWorkRequestEvent("LIST FRAGMENT - SORT RECIPES BY TIME SELECTED - ASCENDING ORDER")
                 }
                 else if(parent.getItemAtPosition(pos).toString() == "Time (Descending)") {
                     viewModel.sortTimeRegularList(false)
+                    MainActivity.appendWorkRequestEvent("LIST FRAGMENT - SORT RECIPES BY TIME SELECTED - DESCENDING ORDER")
                 }
                 else if(parent.getItemAtPosition(pos).toString() == "Cost (Ascending)") {
                     viewModel.sortCostRegularList(true)
+                    MainActivity.appendWorkRequestEvent("LIST FRAGMENT - SORT RECIPES BY COST SELECTED - ASCENDING ORDER")
                 }
                 else if(parent.getItemAtPosition(pos).toString() == "Cost (Descending)") {
                     viewModel.sortCostRegularList(false)
+                    MainActivity.appendWorkRequestEvent("LIST FRAGMENT - SORT RECIPES BY COST SELECTED - DESCENDING ORDER")
                 }
                 else if(parent.getItemAtPosition(pos).toString() == "Cals (Ascending)") {
                     viewModel.sortCaloriesRegularList(true)
+                    MainActivity.appendWorkRequestEvent("LIST FRAGMENT - SORT RECIPES BY CALORIES SELECTED - ASCENDING ORDER")
                 }
                 else if(parent.getItemAtPosition(pos).toString() == "Cals (Descending)") {
                     viewModel.sortCaloriesRegularList(false)
+                    MainActivity.appendWorkRequestEvent("LIST FRAGMENT - SORT RECIPES BY CALORIES SELECTED - DESCENDING ORDER")
                 }
                 else { //Default Case
                     //do nothing...
+                    MainActivity.appendWorkRequestEvent("LIST FRAGMENT - DEFAULT SORT LABEL SELECTED")
                 }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // when selection is empty
+                MainActivity.appendWorkRequestEvent("LIST FRAGMENT - SPINNER SELECTED BUT NO SORTING SELECTION CHOSEN")
             }
         })
 
