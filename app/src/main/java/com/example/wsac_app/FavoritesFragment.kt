@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -150,8 +151,10 @@ class FavoritesFragment : Fragment() {
 
         override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
             holder.view.findViewById<TextView>(R.id.name).text = recipes[position].name
-            holder.view.findViewById<TextView>(R.id.name).setTextColor(Color.parseColor("#FFFFFF"))
-            holder.view.findViewById<CardView>(R.id.list_card)?.setCardBackgroundColor(Color.parseColor("#173B5A"))
+            holder.view.findViewById<TextView>(R.id.name).setTextColor(
+                ContextCompat.getColor(requireContext(), R.color.white))
+            holder.view.findViewById<CardView>(R.id.list_card)?.setCardBackgroundColor(
+                ContextCompat.getColor(requireContext(), R.color.cadet_blue))
             holder.view.findViewById<ImageView>(R.id.image).setImageResource(parser.getPhoto(recipes[position].name))
 
             holder.itemView.setOnClickListener() {

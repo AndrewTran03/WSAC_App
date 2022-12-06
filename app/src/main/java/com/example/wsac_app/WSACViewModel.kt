@@ -65,12 +65,10 @@ class WSACViewModel (application: Application): AndroidViewModel(application) {
     var likedRecipeList = mutableListOf<FoodItem>()
     fun addToFavorites() {
         likedRecipeList.add(currentItem)
-        Log.d("recipe is in favorites:", inFavorites(currentItem).toString())
         likedRecipes.value = likedRecipeList
     }
     fun removeFromFavorites() {
         likedRecipeList.remove(currentItem)
-        Log.d("recipe is in favorites:", inFavorites(currentItem).toString())
         likedRecipes.value = likedRecipeList
     }
     fun inFavorites(item: FoodItem): Boolean {

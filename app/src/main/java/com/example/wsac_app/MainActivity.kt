@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     fun updateStatus(appName: String) {
         MainActivity.appendWorkRequestEvent("$appName IS NOW RUNNING AND OPERATIONAL")
-        Toast.makeText(applicationContext, "WSAC App is now running currently!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, getString(R.string.run_status), Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
                 //navControl.navigate(R.id.action_recipeFragment_to_favoritesFragment)
                 R.id.nav_submissions_fragment ->
                     if (viewModel.loggedIn) {
-                        val toast: Toast = Toast.makeText(applicationContext, "Welcome back, Admin", Toast.LENGTH_SHORT)
+                        val toast: Toast = Toast.makeText(applicationContext, getString(R.string.welcome), Toast.LENGTH_SHORT)
                         toast.show()
                         navigateWithClearStack(R.id.submissionsFragment)
                     }

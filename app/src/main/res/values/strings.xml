@@ -1,6 +1,34 @@
 <resources>
     <string name="app_name">WSAC_App</string>
+
+    <!-- Recipe Fragment -->
+    <string name="like_caption">LIKE</string>
+    <string name="unlike_caption">UNLIKE</string>
+    <string name="made_times_placeholder">Made: 0 time(s)</string>
     <string name="floating_button_description">Floating action button</string>
+
+    <!-- Login Fragment -->
+    <string name="welcome">Welcome, Admin</string>
+    <string name="pass_prompt">Please enter correct password</string>
+    <string name="run_status">WSAC App is now running currently!</string>
+    <string name="password_caption">Password</string>
+    <string name="login_caption">Login</string>
+
+    <!-- Confirmation Fragment -->
+    <string name="confirmation_caption">Your entry has been submitted.</string>
+    <string name="thank_you">Thank you!</string>
+
+    <!-- Submissions Fragment -->
+    <string name="title_hint">Title</string>
+    <string name="time_hint">Time (mins)</string>
+    <string name="cost_hint">Cost ($)</string>
+    <string name="cals_hint">Cal</string>
+    <string name="ingredients_hint">Ingredients</string>
+    <string name="instructions_hint">Instructions</string>
+    <string name="preview_caption">Preview</string>
+    <string name="submit_caption">Submit</string>
+
+    <!-- List and Favorites Fragment -->
     <string-array name="sorts">
         <item>Select Type of Sort</item>
         <item>Name (Ascending)</item>

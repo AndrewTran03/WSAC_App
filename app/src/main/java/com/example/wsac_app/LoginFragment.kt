@@ -46,13 +46,13 @@ class LoginFragment : Fragment() {
         //Listeners
         binding.loginButton.setOnClickListener {
                 if (password.equals("admin")) {
-                    val toast: Toast = Toast.makeText(activity?.applicationContext, "Welcome, Admin", Toast.LENGTH_SHORT)
+                    val toast: Toast = Toast.makeText(activity?.applicationContext, getString(R.string.welcome), Toast.LENGTH_SHORT)
                     viewModel.loggedIn = true
                     toast.show()
                     MainActivity.appendWorkRequestEvent("LOGIN FRAGMENT - SUCCESSFUL LOGIN")
                     view.findNavController()?.navigate(R.id.action_loginFragment_to_submissionsFragment)
                 } else {
-                    val toast: Toast = Toast.makeText(activity?.applicationContext, "Please enter correct password", Toast.LENGTH_SHORT)
+                    val toast: Toast = Toast.makeText(activity?.applicationContext, getString(R.string.pass_prompt), Toast.LENGTH_SHORT)
                     toast.show()
                     MainActivity.appendWorkRequestEvent("LOGIN FRAGMENT - INVALID LOGIN ATTEMPT")
                 }

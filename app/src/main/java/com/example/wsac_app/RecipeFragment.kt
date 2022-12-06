@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat.getColor
 import androidx.core.view.isInvisible
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -132,11 +134,11 @@ class RecipeFragment : Fragment() {
 
         //code for Liked ToggleButton
         likeButton = view.findViewById<ToggleButton>(R.id.like_button)
-        likeButton?.text = "LIKE"
-        likeButton?.textOff = "LIKE"
-        likeButton?.textOn = "UNLIKE"
+        likeButton?.text = getString(R.string.like_caption)
+        likeButton?.textOff = getString(R.string.like_caption)
+        likeButton?.textOn = getString(R.string.unlike_caption)
         if(viewModel.currPreviewing) {
-            likeButton?.setTextColor(Color.parseColor("#753740"))
+            likeButton?.setTextColor(ContextCompat.getColor(requireContext(), R.color.chicago_maroon_dark))
             likeButton?.isEnabled = false
             likeButton?.isClickable = false
         }
@@ -146,7 +148,7 @@ class RecipeFragment : Fragment() {
             if (viewModel.inFavorites(viewModel.currentItem)) {
                 likeButton?.isChecked = true
             } else {
-                likeButton?.text = "LIKE"
+                likeButton?.text = getString(R.string.like_caption)
                 likeButton?.isChecked = false
             }
             likeButton?.setOnCheckedChangeListener { _, isChecked ->
