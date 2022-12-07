@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
     tools:context=".RecipeFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/recipe_card"
-        android:layout_width="382dp"
-        android:layout_height="695dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center"
         app:cardBackgroundColor="@color/burnt_orange"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,7 +25,7 @@
             android:fillViewport="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp">
 
@@ -101,11 +101,11 @@
                     android:layout_marginTop="24dp"
                     android:contentDescription="@string/floating_button_description"
                     android:src="@drawable/ic_plus"
-                    app:tint="@android:color/white"
                     app:backgroundTint="@color/burnt_orange_dark"
                     app:fabCustomSize="40dp"
                     app:layout_constraintStart_toEndOf="@+id/made_text"
-                    app:layout_constraintTop_toBottomOf="@+id/recipe_image" />
+                    app:layout_constraintTop_toBottomOf="@+id/recipe_image"
+                    app:tint="@android:color/white" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/minus_button"
@@ -117,11 +117,11 @@
                     android:layout_marginTop="10dp"
                     android:contentDescription="@string/floating_button_description"
                     android:src="@drawable/ic_minus"
-                    app:tint="@android:color/white"
                     app:backgroundTint="@color/burnt_orange_dark"
                     app:fabCustomSize="40dp"
                     app:layout_constraintStart_toEndOf="@+id/plus_button"
-                    app:layout_constraintTop_toBottomOf="@+id/recipe_image" />
+                    app:layout_constraintTop_toBottomOf="@+id/recipe_image"
+                    app:tint="@android:color/white" />
 
                 <TextView
                     android:id="@+id/instructions_title"
@@ -209,8 +209,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="@string/like_caption"
                     android:backgroundTint="@color/chicago_maroon"
+                    android:text="@string/like_caption"
                     android:textColor="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/made_text" />
