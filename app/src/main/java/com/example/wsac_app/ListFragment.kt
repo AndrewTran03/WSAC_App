@@ -27,8 +27,7 @@ class ListFragment : Fragment() {
 
     //Viewbinding
     private var _binding: FragmentListBinding? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,46 +56,38 @@ class ListFragment : Fragment() {
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Apply the adapter to the spinner
-            binding.sortDropdown?.adapter = adapter
+            binding.sortDropdown.adapter = adapter
         }
 
         //set spinner's event listener
-        binding.sortDropdown?.setOnItemSelectedListener(object: AdapterView.OnItemSelectedListener {
+        binding.sortDropdown.setOnItemSelectedListener(object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
                 // detect item selected
                 if(parent.getItemAtPosition(pos).toString() == "Name (Ascending)") {
                     viewModel.sortNameRegularList(true)
                     MainActivity.appendWorkRequestEvent("LIST FRAGMENT - SORT RECIPES BY NAME SELECTED - ASCENDING ORDER")
-                }
-                else if(parent.getItemAtPosition(pos).toString() == "Name (Descending)") {
+                } else if(parent.getItemAtPosition(pos).toString() == "Name (Descending)") {
                     viewModel.sortNameRegularList(false)
                     MainActivity.appendWorkRequestEvent("LIST FRAGMENT - SORT RECIPES BY NAME SELECTED - DESCENDING ORDER")
-                }
-                else if(parent.getItemAtPosition(pos).toString() == "Time (Ascending)") {
+                } else if(parent.getItemAtPosition(pos).toString() == "Time (Ascending)") {
                     viewModel.sortTimeRegularList(true)
                     MainActivity.appendWorkRequestEvent("LIST FRAGMENT - SORT RECIPES BY TIME SELECTED - ASCENDING ORDER")
-                }
-                else if(parent.getItemAtPosition(pos).toString() == "Time (Descending)") {
+                } else if(parent.getItemAtPosition(pos).toString() == "Time (Descending)") {
                     viewModel.sortTimeRegularList(false)
                     MainActivity.appendWorkRequestEvent("LIST FRAGMENT - SORT RECIPES BY TIME SELECTED - DESCENDING ORDER")
-                }
-                else if(parent.getItemAtPosition(pos).toString() == "Cost (Ascending)") {
+                } else if(parent.getItemAtPosition(pos).toString() == "Cost (Ascending)") {
                     viewModel.sortCostRegularList(true)
                     MainActivity.appendWorkRequestEvent("LIST FRAGMENT - SORT RECIPES BY COST SELECTED - ASCENDING ORDER")
-                }
-                else if(parent.getItemAtPosition(pos).toString() == "Cost (Descending)") {
+                } else if(parent.getItemAtPosition(pos).toString() == "Cost (Descending)") {
                     viewModel.sortCostRegularList(false)
                     MainActivity.appendWorkRequestEvent("LIST FRAGMENT - SORT RECIPES BY COST SELECTED - DESCENDING ORDER")
-                }
-                else if(parent.getItemAtPosition(pos).toString() == "Cals (Ascending)") {
+                } else if(parent.getItemAtPosition(pos).toString() == "Cals (Ascending)") {
                     viewModel.sortCaloriesRegularList(true)
                     MainActivity.appendWorkRequestEvent("LIST FRAGMENT - SORT RECIPES BY CALORIES SELECTED - ASCENDING ORDER")
-                }
-                else if(parent.getItemAtPosition(pos).toString() == "Cals (Descending)") {
+                } else if(parent.getItemAtPosition(pos).toString() == "Cals (Descending)") {
                     viewModel.sortCaloriesRegularList(false)
                     MainActivity.appendWorkRequestEvent("LIST FRAGMENT - SORT RECIPES BY CALORIES SELECTED - DESCENDING ORDER")
-                }
-                else { //Default Case
+                } else { //Default Case
                     //do nothing...
                     MainActivity.appendWorkRequestEvent("LIST FRAGMENT - DEFAULT SORT LABEL SELECTED")
                 }

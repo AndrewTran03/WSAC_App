@@ -19,16 +19,16 @@ class RecipeFragment : Fragment() {
 
     //Class Variables
     private lateinit var viewModel: WSACViewModel
-    private var nameText: TextView?= null
-    private var timeText: TextView ?= null
-    private var costText: TextView ?= null
-    private var calText: TextView ?= null
-    private var ingredientsText: TextView ?= null
-    private var instructionsText: TextView ?= null
-    private var photoImage: ImageView?= null
-    private var likeButton: ToggleButton?= null
-    private var plusButton: FloatingActionButton?= null
-    private var minusButton: FloatingActionButton?= null
+    private var nameText: TextView? = null
+    private var timeText: TextView? = null
+    private var costText: TextView? = null
+    private var calText: TextView? = null
+    private var ingredientsText: TextView? = null
+    private var instructionsText: TextView? = null
+    private var photoImage: ImageView? = null
+    private var likeButton: ToggleButton? = null
+    private var plusButton: FloatingActionButton? = null
+    private var minusButton: FloatingActionButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,13 +48,13 @@ class RecipeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        nameText = view.findViewById(R.id.recipe_title)
-        timeText = view.findViewById(R.id.time_text)
-        costText = view.findViewById(R.id.cost_text)
-        calText = view.findViewById(R.id.cal_text)
+        nameText = view.findViewById<TextView>(R.id.recipe_title)
+        timeText = view.findViewById<TextView>(R.id.time_text)
+        costText = view.findViewById<TextView>(R.id.cost_text)
+        calText = view.findViewById<TextView>(R.id.cal_text)
 
-        ingredientsText = view.findViewById(R.id.ingredients_text)
-        instructionsText = view.findViewById(R.id.instructions_text)
+        ingredientsText = view.findViewById<TextView>(R.id.ingredients_text)
+        instructionsText = view.findViewById<TextView>(R.id.instructions_text)
         plusButton = view.findViewById<FloatingActionButton>(R.id.plus_button)
         minusButton = view.findViewById<FloatingActionButton>(R.id.minus_button)
 
@@ -80,14 +80,6 @@ class RecipeFragment : Fragment() {
 
             photoImage = view.findViewById(R.id.recipe_image)
             photoImage?.setImageResource(viewModel.previewItem.photoId!!)
-
-            //disable Made Times buttons
-            /*
-            plusButton?.isEnabled = false
-            plusButton?.isClickable = false
-            minusButton?.isEnabled = false
-            minusButton?.isClickable = false
-            */
         } else {
             nameText?.text = viewModel.currentItem.name
             timeText?.text = "${viewModel.currentItem.time} m"
@@ -111,15 +103,7 @@ class RecipeFragment : Fragment() {
             photoImage = view.findViewById(R.id.recipe_image)
             photoImage?.setImageResource(viewModel.currentItem.photoId!!)
 
-            //code for Made Times buttons
-            /*
-            plusButton?.isEnabled = true
-            plusButton?.isClickable = true
-            minusButton?.isEnabled = true
-            minusButton?.isClickable = true
-            */
-            view.findViewById<TextView>(R.id.made_text).text =
-                Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
+            view.findViewById<TextView>(R.id.made_text).text = Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
             plusButton?.setOnClickListener {
                 viewModel.currentItem.madeTimes++
                 view.findViewById<TextView>(R.id.made_text).text =
@@ -136,7 +120,7 @@ class RecipeFragment : Fragment() {
             }
         }
 
-        //code for Liked ToggleButton
+        //Code for Liked ToggleButton and Plus/Minus Buttons
         likeButton = view.findViewById<ToggleButton>(R.id.like_button)
         likeButton?.text = getString(R.string.like_caption)
         likeButton?.textOff = getString(R.string.like_caption)
