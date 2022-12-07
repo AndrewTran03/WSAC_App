@@ -55,6 +55,8 @@ class RecipeFragment : Fragment() {
 
         ingredientsText = view.findViewById(R.id.ingredients_text)
         instructionsText = view.findViewById(R.id.instructions_text)
+        plusButton = view.findViewById<FloatingActionButton>(R.id.plus_button)
+        minusButton = view.findViewById<FloatingActionButton>(R.id.minus_button)
 
         if(viewModel.currPreviewing) {
             nameText?.text = viewModel.previewItem.name
@@ -79,19 +81,11 @@ class RecipeFragment : Fragment() {
             photoImage = view.findViewById(R.id.recipe_image)
             photoImage?.setImageResource(viewModel.previewItem.photoId!!)
 
-            //code for Made Times buttons
-            view.findViewById<TextView>(R.id.made_text).text =
-                Html.fromHtml("Made: <b>${viewModel.previewItem.madeTimes}</b> times(s)")
-            view.findViewById<FloatingActionButton>(R.id.plus_button).setOnClickListener {
-                viewModel.previewItem.madeTimes++
-                view.findViewById<TextView>(R.id.made_text).text =
-                    Html.fromHtml("Made: <b>${viewModel.previewItem.madeTimes}</b> times(s)")
-            }
-            view.findViewById<FloatingActionButton>(R.id.minus_button).setOnClickListener {
-                viewModel.previewItem.madeTimes--
-                view.findViewById<TextView>(R.id.made_text).text =
-                    Html.fromHtml("Made: <b>${viewModel.previewItem.madeTimes}</b> times(s)")
-            }
+            //disable Made Times buttons
+            plusButton?.isEnabled = false
+            plusButton?.isClickable = false
+            minusButton?.isEnabled = false
+            minusButton?.isClickable = false
         } else {
             nameText?.text = viewModel.currentItem.name
             timeText?.text = "${viewModel.currentItem.time} m"
@@ -115,9 +109,11 @@ class RecipeFragment : Fragment() {
             photoImage = view.findViewById(R.id.recipe_image)
             photoImage?.setImageResource(viewModel.currentItem.photoId!!)
 
-            plusButton = view.findViewById<FloatingActionButton>(R.id.plus_button)
-            minusButton = view.findViewById<FloatingActionButton>(R.id.minus_button)
             //code for Made Times buttons
+            plusButton?.isEnabled = true
+            plusButton?.isClickable = true
+            minusButton?.isEnabled = true
+            minusButton?.isClickable = true
             view.findViewById<TextView>(R.id.made_text).text =
                 Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
             plusButton?.setOnClickListener {
