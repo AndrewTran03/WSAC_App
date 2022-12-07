@@ -118,13 +118,15 @@ class SubmissionsFragment : Fragment() {
         submitButton = view.findViewById(R.id.submit_button)
         submitButton?.setOnClickListener( object: View.OnClickListener {
             override fun onClick(v: View?) {
-                viewModel.currPreviewing = false
-                viewModel.currentItem = viewModel.previewItem.copy()
-                //Log.d("BEFORE SUBMIT", viewModel.recipeList.size.toString())
-                viewModel.addFoodItem()
-                //Log.d("AFTER SUBMIT", viewModel.recipeList.size.toString())
-                MainActivity.appendWorkRequestEvent("SUBMISSIONS FRAGMENT - RECIPE ${viewModel.currentItem.name} SUBMITTED TO LIST FRAGMENT")
-                view.findNavController()?.navigate(R.id.action_submissionsFragment_to_confirmationFragment)
+                if(viewModel.previewItem.cost < 0.00 || viewModel.previewItem.cal < 0 || viewModel.previewItem.time < 0) {
+                    Toast.makeText(requireContext(), "Error! Invalid entry for time, calories, or cost!", Toast.LENGTH_SHORT).show()
+                } else {
+                    viewModel.currPreviewing = false
+                    viewModel.currentItem = viewModel.previewItem.copy()
+                    viewModel.addFoodItem()
+                    MainActivity.appendWorkRequestEvent("SUBMISSIONS FRAGMENT - RECIPE ${viewModel.currentItem.name} SUBMITTED TO LIST FRAGMENT")
+                    view.findNavController()?.navigate(R.id.action_submissionsFragment_to_confirmationFragment)
+                }
             }
         })
 
