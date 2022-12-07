@@ -44,6 +44,8 @@ class SubmissionsFragment : Fragment() {
 
         //Viewmodel
         viewModel = ViewModelProvider(requireActivity())[WSACViewModel::class.java]
+        //reset everything
+        viewModel.resetPreviewFoodItem()
 
         //Title listener
         binding.titleEditText.addTextChangedListener(object : TextWatcher {
@@ -104,7 +106,6 @@ class SubmissionsFragment : Fragment() {
         previewButton?.setOnClickListener( object: View.OnClickListener {
             override fun onClick(v: View?) {
                 viewModel.currPreviewing = true
-                viewModel.setPreviewFoodItem(viewModel.previewItem.copy())
                 MainActivity.appendWorkRequestEvent("SUBMISSIONS FRAGMENT - RECIPE ${viewModel.currentItem.name} BEING PREVIEWED")
                 view.findNavController()?.navigate(R.id.action_submissionsFragment_to_recipeFragment)
             }
@@ -115,10 +116,11 @@ class SubmissionsFragment : Fragment() {
             override fun onClick(v: View?) {
                 if(viewModel.previewItem.cost < 0.00 || viewModel.previewItem.cal < 0 || viewModel.previewItem.time < 0) {
                     MainActivity.appendWorkRequestEvent("SUBMISSIONS FRAGMENT - INVALID RECIPE ENTRY CREATED")
-                    Toast.makeText(requireContext(), "Error! Invalid entry for time, calories, or cost!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Error: Invalid time, calories, or cost.", Toast.LENGTH_SHORT).show()
                 } else {
                     viewModel.currPreviewing = false
                     viewModel.currentItem = viewModel.previewItem.copy()
+                    viewModel.resetPreviewFoodItem()
                     viewModel.addFoodItem()
                     MainActivity.appendWorkRequestEvent("SUBMISSIONS FRAGMENT - RECIPE ${viewModel.currentItem.name} SUBMITTED TO LIST FRAGMENT")
                     view.findNavController()?.navigate(R.id.action_submissionsFragment_to_confirmationFragment)

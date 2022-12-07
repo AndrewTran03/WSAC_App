@@ -3,10 +3,8 @@ package com.example.wsac_app
 import java.lang.NumberFormatException
 import java.util.*
 
-var photoMap = mapOf("mac" to R.drawable.macncheese,
-                    "burger" to R.drawable.burger,
-                    "spaghetti" to R.drawable.spaghetti,
-                    "taco" to R.drawable.taco)
+var photoMap = PhotoDictionary()
+
 class Parser {
     fun getTitle(title: String): String {
         return title
@@ -51,9 +49,9 @@ class Parser {
     }
 
     fun getPhoto(keyword: String): Int {
-        for ((key, value) in photoMap) {
+        for (key in photoMap.map.keys) {
             if (keyword.lowercase().contains(key)) {
-                return value
+                return photoMap.map[key]!!
             }
         }
         return R.drawable.mac

@@ -113,9 +113,11 @@ class WSACViewModel(application: Application) : AndroidViewModel(application) {
 
     //Preview Functionality
     var currPreviewing: Boolean = false
-    var previewItem: FoodItem = FoodItem("test", 1, 1.99, 100,
+    var previewItem: FoodItem = FoodItem("test", -1, -1.00, -1,
         arrayOf<String>(), arrayOf<String>(), 0, 0)
-    fun setPreviewFoodItem(newPreviewFoodItem: FoodItem) {
-        previewItem = newPreviewFoodItem
+
+    fun resetPreviewFoodItem() {
+        previewItem = FoodItem("test", -1, -1.00, -1,
+            arrayOf<String>(), arrayOf<String>(), 0, 0)
     }
 }

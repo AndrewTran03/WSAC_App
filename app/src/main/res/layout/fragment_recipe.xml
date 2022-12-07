@@ -198,6 +198,8 @@
                     android:id="@+id/recipe_image"
                     android:layout_width="160dp"
                     android:layout_height="160dp"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
                     android:layout_marginStart="8dp"
                     android:src="@drawable/macncheese"
                     app:layout_constraintStart_toStartOf="parent"
