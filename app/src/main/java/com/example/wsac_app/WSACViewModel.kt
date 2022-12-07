@@ -92,7 +92,6 @@ class WSACViewModel(application: Application) : AndroidViewModel(application) {
             likedRecipes.value = likedRecipeList
         }
     }
-    private var sortAscendCostFavList: Boolean = true
     fun sortCostFavList(sortAscendCostFavList: Boolean) {
         if (sortAscendCostFavList) {
             likedRecipeList.sortBy { it.cost }
@@ -102,7 +101,6 @@ class WSACViewModel(application: Application) : AndroidViewModel(application) {
             likedRecipes.value = likedRecipeList
         }
     }
-    private var sortAscendCalsFavList: Boolean = true
     fun sortCaloriesFavList(sortAscendCalsFavList: Boolean) {
         if (sortAscendCalsFavList) {
             likedRecipeList.sortBy { it.cal }
