@@ -132,6 +132,16 @@ class FavoritesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    override fun onPause() {
+        super.onPause()
+        MainActivity.appendWorkRequestEvent("FAVORITES FRAGMENT - VIEW IS PAUSED")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        MainActivity.appendWorkRequestEvent("FAVORITES FRAGMENT - VIEW HAS BEEN RESUMED/RESTORED")
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     inner class RecipeListAdapter() :
         RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder>() {

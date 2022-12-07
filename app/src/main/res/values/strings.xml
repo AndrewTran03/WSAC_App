@@ -12,7 +12,7 @@
     <!-- Login Fragment -->
     <string name="welcome">Welcome, Admin</string>
     <string name="pass_prompt">Please enter correct password</string>
-    <string name="run_status">WSAC App is now running currently!</string>
+    <string name="run_status">WSAC App is now active and currently running!</string>
     <string name="password_caption">Password</string>
     <string name="login_caption">Login</string>
 

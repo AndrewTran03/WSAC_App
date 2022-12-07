@@ -29,4 +29,14 @@ class ConfirmationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
+    override fun onPause() {
+        super.onPause()
+        MainActivity.appendWorkRequestEvent("CONFIRMATION FRAGMENT - VIEW IS PAUSED")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        MainActivity.appendWorkRequestEvent("CONFIRMATION FRAGMENT - VIEW HAS BEEN RESUMED/RESTORED")
+    }
 }

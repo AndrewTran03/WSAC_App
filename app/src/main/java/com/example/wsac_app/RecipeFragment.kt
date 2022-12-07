@@ -176,4 +176,14 @@ class RecipeFragment : Fragment() {
     private fun usingKotlinStringFormat(input: Double, scale: Int): kotlin.String {
         return "%.${scale}f".format(input)
     }
+
+    override fun onPause() {
+        super.onPause()
+        MainActivity.appendWorkRequestEvent("RECIPE FRAGMENT - VIEW IS PAUSED")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        MainActivity.appendWorkRequestEvent("RECIPE FRAGMENT - VIEW HAS BEEN RESUMED/RESTORED")
+    }
 }

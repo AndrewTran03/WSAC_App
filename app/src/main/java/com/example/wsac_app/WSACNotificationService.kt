@@ -9,9 +9,6 @@ import android.os.IBinder
 class WSACNotificationService : Service() {
 
     //Class Variables
-    companion object {
-        const val COMPLETE_INTENT = "Complete Intent"
-    }
     private val iBinder = MyBinder()
     private val CHANNEL_ID = "WSAC Channel ID"
 
@@ -30,6 +27,9 @@ class WSACNotificationService : Service() {
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+        MainActivity.appendWorkRequestEvent("WSAC NOTIFICATION SERVICE ENACTED - ON_START_COMMAND() " +
+            "AND CREATE_NOTIFICATION_CHANNEL() FUNCTIONS CALLED")
+
         this.createNotificationChannel()
 
         val pendingIntent: PendingIntent = Intent(this, SubmissionsFragment::class.java).let {

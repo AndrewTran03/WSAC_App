@@ -65,4 +65,14 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
+    override fun onPause() {
+        super.onPause()
+        MainActivity.appendWorkRequestEvent("LOGIN FRAGMENT - VIEW IS PAUSED")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        MainActivity.appendWorkRequestEvent("LOGIN FRAGMENT - VIEW HAS BEEN RESUMED/RESTORED")
+    }
 }

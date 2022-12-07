@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.*
 import android.os.Bundle
 import android.os.IBinder
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,26 +31,6 @@ class ListFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    //WSAC Notification Service
-    private var wsacBroadcastReceiver: WSACBroadcastReceiver? = null
-    private var startWSACNotificationServiceIntent: Intent? = null
-    private var isInitialized: Boolean = false
-    private var isBound: Boolean = false
-    private var wsacNotificationService: WSACNotificationService? = null
-    private val musicServiceConnection = object : ServiceConnection {
-        @SuppressLint("SetTextI18n")
-        override fun onServiceConnected(componentName: ComponentName, iBinder: IBinder) {
-            val binder = iBinder as WSACNotificationService.MyBinder
-            wsacNotificationService = binder.getService()
-            isBound = true
-        }
-
-        override fun onServiceDisconnected(componentName: ComponentName) {
-            wsacNotificationService = null
-            isBound = false
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -68,18 +47,6 @@ class ListFragment : Fragment() {
         recyclerView = binding.listFragRecyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-
-        //WSAC Notification Service
-        if (savedInstanceState != null) {
-            isInitialized = savedInstanceState.getBoolean(SubmissionsFragment.INITIALIZE_STATUS)
-            isBound = false
-        }
-        startWSACNotificationServiceIntent = Intent(requireContext(), WSACNotificationService::class.java)
-        if (!isInitialized) {
-            activity?.startService(startWSACNotificationServiceIntent)
-            isInitialized = true
-        }
-        wsacBroadcastReceiver = WSACBroadcastReceiver(this)
 
         // Gets the sorting options from an array in strings.xml for dropdown
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -162,21 +129,12 @@ class ListFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        if (isBound) {
-            activity?.unbindService(musicServiceConnection)
-            isBound = false
-        }
-        activity?.unregisterReceiver(wsacBroadcastReceiver)
-        MainActivity.appendWorkRequestEvent("PLAY FRAGMENT - VIEW IS ON_PAUSE")
+        MainActivity.appendWorkRequestEvent("LIST FRAGMENT - VIEW IS PAUSED")
     }
 
     override fun onResume() {
         super.onResume()
-        if (isInitialized && !isBound) {
-            activity?.bindService(startWSACNotificationServiceIntent, musicServiceConnection, Context.BIND_AUTO_CREATE)
-        }
-        activity?.registerReceiver(wsacBroadcastReceiver, IntentFilter(WSACNotificationService.COMPLETE_INTENT))
-        MainActivity.appendWorkRequestEvent("PLAY FRAGMENT - VIEW IS ON_RESUME")
+        MainActivity.appendWorkRequestEvent("LIST FRAGMENT - VIEW HAS BEEN RESUMED/RESTORED")
     }
 
     @SuppressLint("SetTextI18n")

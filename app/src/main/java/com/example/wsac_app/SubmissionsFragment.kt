@@ -16,17 +16,12 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.example.wsac_app.WSACNotificationService.Companion.COMPLETE_INTENT
 import com.example.wsac_app.databinding.FragmentLoginBinding
 import com.example.wsac_app.databinding.FragmentSubmissionsBinding
 
 class SubmissionsFragment : Fragment() {
 
     //Class Variables
-    companion object {
-        const val INITIALIZE_STATUS: String = "INITIALIZATION STATUS"
-    }
-
     private var previewButton: Button?= null
     private var submitButton: Button?= null
 
@@ -119,6 +114,7 @@ class SubmissionsFragment : Fragment() {
         submitButton?.setOnClickListener( object: View.OnClickListener {
             override fun onClick(v: View?) {
                 if(viewModel.previewItem.cost < 0.00 || viewModel.previewItem.cal < 0 || viewModel.previewItem.time < 0) {
+                    MainActivity.appendWorkRequestEvent("SUBMISSIONS FRAGMENT - INVALID RECIPE ENTRY CREATED")
                     Toast.makeText(requireContext(), "Error! Invalid entry for time, calories, or cost!", Toast.LENGTH_SHORT).show()
                 } else {
                     viewModel.currPreviewing = false
@@ -136,5 +132,15 @@ class SubmissionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        MainActivity.appendWorkRequestEvent("SUBMISSIONS FRAGMENT - VIEW IS PAUSED")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        MainActivity.appendWorkRequestEvent("SUBMISSIONS FRAGMENT - VIEW HAS BEEN RESUMED/RESTORED")
     }
 }

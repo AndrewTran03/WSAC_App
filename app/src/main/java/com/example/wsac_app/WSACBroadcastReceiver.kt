@@ -3,11 +3,14 @@ package com.example.wsac_app
 import android.content.Intent
 import android.content.BroadcastReceiver
 import android.content.Context
+import android.util.Log
+import android.widget.Toast
 
-class WSACBroadcastReceiver(private var listFragment: ListFragment? = null) : BroadcastReceiver() {
+class WSACBroadcastReceiver(private var mainActivity: MainActivity? = null) : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        val appName = intent.getStringExtra(MainActivity.APP_NAME)
-        listFragment!!.updateStatus(appName!!)
+        MainActivity.appendWorkRequestEvent("WSAC BROADCAST RECEIVER ENACTED - ON_RECEIVE() FUNCTION CALLED")
+        val appName: String = intent.getStringExtra(MainActivity.APP_NAME)!!
+        mainActivity?.updateStatus(appName)
     }
 }
