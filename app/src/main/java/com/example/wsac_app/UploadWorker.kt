@@ -7,7 +7,7 @@ import androidx.work.WorkerParameters
 import org.json.JSONObject
 import retrofit2.Call
 
-class UploadWorker(appContext: Context, workerParams: WorkerParameters): Worker(appContext, workerParams) {
+class UploadWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
 
     override fun doWork(): Result {
         val json = JSONObject()

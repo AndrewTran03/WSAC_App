@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 
-class WSACViewModel (application: Application): AndroidViewModel(application) {
+class WSACViewModel(application: Application) : AndroidViewModel(application) {
 
     //Class Variables
     //List Fragment
