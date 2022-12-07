@@ -82,10 +82,12 @@ class RecipeFragment : Fragment() {
             photoImage?.setImageResource(viewModel.previewItem.photoId!!)
 
             //disable Made Times buttons
+            /*
             plusButton?.isEnabled = false
             plusButton?.isClickable = false
             minusButton?.isEnabled = false
             minusButton?.isClickable = false
+            */
         } else {
             nameText?.text = viewModel.currentItem.name
             timeText?.text = "${viewModel.currentItem.time} m"
@@ -110,10 +112,12 @@ class RecipeFragment : Fragment() {
             photoImage?.setImageResource(viewModel.currentItem.photoId!!)
 
             //code for Made Times buttons
+            /*
             plusButton?.isEnabled = true
             plusButton?.isClickable = true
             minusButton?.isEnabled = true
             minusButton?.isClickable = true
+            */
             view.findViewById<TextView>(R.id.made_text).text =
                 Html.fromHtml("Made: <b>${viewModel.currentItem.madeTimes}</b> times(s)")
             plusButton?.setOnClickListener {
